@@ -36,7 +36,6 @@ async function seedAlbums(client) {
             ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
             ${album.album.wiki.published}, ${album.album.wiki.summary}
         )
-        ON CONFLICT (id) DO NOTHING;
       `;
       }),
     );
