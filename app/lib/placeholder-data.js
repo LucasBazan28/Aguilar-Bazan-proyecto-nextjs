@@ -34,7 +34,7 @@ async function completeAlbums(){
         const data = await fetchData(url);
         albums.push(data)
      }
-    return albums; 
+
 }
 
 async function main() {
@@ -54,6 +54,7 @@ async function main() {
             // Imprimir los valores "summary" y "published" dentro de "wiki"
             console.log("Resumen:", wiki.summary);
             console.log("Publicado:", wiki.published);
+            console.log("Imagen 1: ", album.album.image[0]["#text"])
         } else {
             console.log("Este álbum no tiene información de wiki.");
         }
@@ -66,3 +67,7 @@ main().catch((err) => {
       err,
     );
   });
+
+module.exports = {
+    albums
+};
