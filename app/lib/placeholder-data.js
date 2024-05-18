@@ -2,67 +2,67 @@ const PlaceHoldersData = [
     {
         artist: "Scorpions",
         album: "Crazy World",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Scorpions",
         album: "Blackout",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Queen",
         album: "The Game",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Queen",
         album: "A Night At The Opera",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Metallica",
         album: "Black Album",
-        gender: "metal"
+        genre: "metal"
     },
     {
         artist: "Metallica",
         album: "Master Of Puppets",
-        gender: "metal"
+        genre: "metal"
     },
     {
         artist: "Creed",
         album: "My Own Prison",
-        gender: "metal"
+        genre: "metal"
     },
     {
         artist: "Creed",
         album: "Human Clay",
-        gender: "metal"
+        genre: "metal"
     },
     {
         artist: "Maria Becerra",
         album: "Animal",
-        gender: "pop"
+        genre: "pop"
     },
     {
         artist: "Maria Becerra",
         album: "La Nena De Argentina",
-        gender: "pop"
+        genre: "pop"
     },
     {
         artist: "Aerosmith",
         album: "Rocks",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Aerosmith",
         album: "Pump",
-        gender: "rock"
+        genre: "rock"
     },
     {
         artist: "Aerosmith",
         album: "Get Your Wings",
-        gender: "rock"
+        genre: "rock"
     }
 ]
 
@@ -81,7 +81,7 @@ async function completeAlbums(){
     for (let i = 0; i < PlaceHoldersData.length; i++) {
         let url = "https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+apiKey+"&artist="+PlaceHoldersData[i].artist+"&album="+PlaceHoldersData[i].album+"&format=json";
         const data = await fetchData(url);
-        data.album.gender = PlaceHoldersData[i].gender;
+        data.album.genre = PlaceHoldersData[i].genre;
         albums.push(data);
      }
 
@@ -103,7 +103,7 @@ async function main() {
             console.log("Imagen " + j + " link: ", album.album.image[j]["#text"])
         }
 
-        console.log("Género:", album.album.gender);
+        console.log("Género:", album.album.genre);
   
         // Verificar si el objeto tiene la propiedad "wiki"
         if (album.album.wiki) {

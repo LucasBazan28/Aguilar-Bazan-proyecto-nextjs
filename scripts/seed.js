@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { db } = require('@vercel/postgres');
 const {
   albums
@@ -6,7 +7,7 @@ const {
 async function seedAlbums(client) {
   try {
 
-    // Create the "users" table if it doesn't exist
+    // Create the "albums" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS albums (
         name VARCHAR(255) NOT NULL,
@@ -18,24 +19,25 @@ async function seedAlbums(client) {
         megaImage VARCHAR(255),
         lastFmUrl VARCHAR(255),
         listeners INT, 
-        gender VARCHAR(255),
+        genre VARCHAR(255),
         summary TEXT
       );
     `;
 
-    console.log(`Created "users" table`);
+    console.log(`Created "albums" table`);
 
-    // Insert data into the "users" table
+    // Insert data into the "albums" table
     const insertedAlbums = await Promise.all(
       albums.map(async (album) => {
         return client.sql`
-        INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, published, summary)
+        INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary)
         VALUES (${album.album.name}, ${album.album.artist},
             ${album.album.image[0]["#text"]}, ${album.album.image[1]["#text"]},
             ${album.album.image[2]["#text"]}, ${album.album.image[3]["#text"]},
             ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
-            ${album.album.gender}, ${album.album.wiki.summary}
+            ${album.album.genre}, ${album.album.wiki.summary}
         )
+        ON CONFLICT (name) DO NOTHING;
       `;
       }),
     );
@@ -47,7 +49,7 @@ async function seedAlbums(client) {
       albums: insertedAlbums,
     };
   } catch (error) {
-    console.error('Error seeding users:', error);
+    console.error('Error seeding albums:', error);
     throw error;
   }
 }
