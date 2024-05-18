@@ -1,55 +1,68 @@
 const PlaceHoldersData = [
     {
         artist: "Scorpions",
-        album: "Crazy World" 
+        album: "Crazy World",
+        gender: "rock"
     },
     {
         artist: "Scorpions",
-        album: "Blackout" 
+        album: "Blackout",
+        gender: "rock"
     },
     {
         artist: "Queen",
-        album: "The Game" 
+        album: "The Game",
+        gender: "rock"
     },
     {
         artist: "Queen",
-        album: "A Night At The Opera" 
+        album: "A Night At The Opera",
+        gender: "rock"
     },
     {
         artist: "Metallica",
-        album: "Black Album"
+        album: "Black Album",
+        gender: "metal"
     },
     {
         artist: "Metallica",
-        album: "Master Of Puppets"
+        album: "Master Of Puppets",
+        gender: "metal"
     },
     {
         artist: "Creed",
-        album: "My Own Prison"
+        album: "My Own Prison",
+        gender: "metal"
     },
     {
         artist: "Creed",
-        album: "Human Clay"
+        album: "Human Clay",
+        gender: "metal"
     },
     {
         artist: "Maria Becerra",
-        album: "Animal"
+        album: "Animal",
+        gender: "pop"
     },
     {
         artist: "Maria Becerra",
-        album: "La Nena De Argentina"
+        album: "La Nena De Argentina",
+        gender: "pop"
     },
     {
         artist: "Aerosmith",
-        album: "Rocks"
+        album: "Rocks",
+        gender: "rock"
     },
     {
         artist: "Aerosmith",
-        album: "Pump"
+        album: "Pump",
+        gender: "rock"
     },
     {
         artist: "Aerosmith",
-        album: "Get Your Wings"
+        album: "Get Your Wings",
+        gender: "rock"
     }
 ]
 
@@ -68,7 +81,8 @@ async function completeAlbums(){
     for (let i = 0; i < PlaceHoldersData.length; i++) {
         let url = "https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+apiKey+"&artist="+PlaceHoldersData[i].artist+"&album="+PlaceHoldersData[i].album+"&format=json";
         const data = await fetchData(url);
-        albums.push(data)
+        data.album.gender = PlaceHoldersData[i].gender;
+        albums.push(data);
      }
 
 }
@@ -83,6 +97,13 @@ async function main() {
         console.log("Artista:", album.album.artist);
         console.log("Nombre del álbum:", album.album.name);
         console.log("Oyentes:", album.album.listeners);
+
+        for (let j = 0; j < album.album.image.length; j++) {        //se muestran las imagenes que tiene cada album
+            console.log("Imagen " + j + " size: ", album.album.image[j]["size"])
+            console.log("Imagen " + j + " link: ", album.album.image[j]["#text"])
+        }
+
+        console.log("Género:", album.album.gender);
   
         // Verificar si el objeto tiene la propiedad "wiki"
         if (album.album.wiki) {
@@ -90,10 +111,6 @@ async function main() {
             // Imprimir los valores "summary" y "published" dentro de "wiki"
             console.log("Resumen:", wiki.summary);
             console.log("Publicado:", wiki.published);
-            for (let j = 0; j < album.album.image.length; j++) {
-                console.log("Imagen " + j + " size: ", album.album.image[j]["size"])
-                console.log("Imagen " + j + " link: ", album.album.image[j]["#text"])
-            }
         } else {
             console.log("Este álbum no tiene información de wiki.");
         }

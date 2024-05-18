@@ -18,7 +18,7 @@ async function seedAlbums(client) {
         megaImage VARCHAR(255),
         lastFmUrl VARCHAR(255),
         listeners INT, 
-        published VARCHAR(255),
+        gender VARCHAR(255),
         summary TEXT
       );
     `;
@@ -34,7 +34,7 @@ async function seedAlbums(client) {
             ${album.album.image[0]["#text"]}, ${album.album.image[1]["#text"]},
             ${album.album.image[2]["#text"]}, ${album.album.image[3]["#text"]},
             ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
-            ${album.album.wiki.published}, ${album.album.wiki.summary}
+            ${album.album.gender}, ${album.album.wiki.summary}
         )
       `;
       }),
