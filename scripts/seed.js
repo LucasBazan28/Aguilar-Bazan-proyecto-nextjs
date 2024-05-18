@@ -2,10 +2,7 @@ const { completeAlbums } = require('./placeholder-data');
 
 require('dotenv').config();
 const { db } = require('@vercel/postgres');
-const { createPool } = require('@vercel/postgres');
 
-// Utiliza la variable de entorno para la cadena de conexión
-const connectionString = process.env.POSTGRES_URL;
 
 async function seedAlbums(client) {
   try {
@@ -57,13 +54,7 @@ async function seedAlbums(client) {
 }
 
 async function main() {
-  // Verificar que la variable de entorno POSTGRES_URL está definida
-  if (!connectionString) {
-    throw new Error('Missing POSTGRES_URL environment variable');
-  }
-
-  const pool = createPool({ connectionString });
-  const client = await pool.connect();
+  const client = await db.connect();
 
   await seedAlbums(client);
 
