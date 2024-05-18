@@ -84,13 +84,17 @@ async function completeAlbums(){
         data.album.genre = PlaceHoldersData[i].genre;
         albums.push(data);
      }
-
+     return albums;
 }
+module.exports = {
+    completeAlbums
+  };
 
+/*
 async function main() {
     await completeAlbums();
 
-    for (let i = 0; i < albums.length; i++) {
+    /*for (let i = 0; i < albums.length; i++) {
         const album = albums[i];
   
         // Imprimir los valores "artist", "name" y "listeners"
@@ -124,6 +128,4 @@ main().catch((err) => {
     );
   });
 
-module.exports = {
-    albums
-};
+*/
