@@ -14,6 +14,42 @@ const PlaceHoldersData = [
     {
         artist: "Queen",
         album: "A Night At The Opera" 
+    },
+    {
+        artist: "Metallica",
+        album: "Black Album"
+    },
+    {
+        artist: "Metallica",
+        album: "Master Of Puppets"
+    },
+    {
+        artist: "Creed",
+        album: "My Own Prison"
+    },
+    {
+        artist: "Creed",
+        album: "Human Clay"
+    },
+    {
+        artist: "Maria Becerra",
+        album: "Animal"
+    },
+    {
+        artist: "Maria Becerra",
+        album: "La Nena De Argentina"
+    },
+    {
+        artist: "Aerosmith",
+        album: "Rocks"
+    },
+    {
+        artist: "Aerosmith",
+        album: "Pump"
+    },
+    {
+        artist: "Aerosmith",
+        album: "Get Your Wings"
     }
 ]
 
@@ -54,7 +90,10 @@ async function main() {
             // Imprimir los valores "summary" y "published" dentro de "wiki"
             console.log("Resumen:", wiki.summary);
             console.log("Publicado:", wiki.published);
-            console.log("Imagen 1: ", album.album.image[0]["#text"])
+            for (let j = 0; j < album.album.image.length; j++) {
+                console.log("Imagen " + j + " size: ", album.album.image[j]["size"])
+                console.log("Imagen " + j + " link: ", album.album.image[j]["#text"])
+            }
         } else {
             console.log("Este álbum no tiene información de wiki.");
         }
