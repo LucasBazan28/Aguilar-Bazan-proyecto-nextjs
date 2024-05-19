@@ -33,14 +33,14 @@ export async function fetchAllAlbums() {
     }
 }
 
-export async function fetchAlbumsWithGender(gender: string) {  //el parametro del genero debe estar en minuscula o pasarse a minuscula acá
+export async function fetchAlbumsWithGender(genre: string) {  //el parametro del genero debe estar en minuscula o pasarse a minuscula acá
                                                                 //la comparación del where es case sensitive
     noStore();
     try {
         const data = await sql<Album>`
             SELECT *
             FROM albums
-            WHERE gender = ${gender}`;
+            WHERE genre = ${genre}`;
   
         return data.rows;
     } catch (error) {
