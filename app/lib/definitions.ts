@@ -8,6 +8,6 @@ export type Album = {
     megaImage: string,
     lastFmUrl: string,
     listeners: number,
-    gender: string,
+    genre: string,
     summary: string
   };
