@@ -1,14 +1,15 @@
+const { completeAlbums } = require('./placeholder-data');
+
 require('dotenv').config();
 const { db } = require('@vercel/postgres');
-const {
-  albums
-} = require('../app/lib/placeholder-data.js');
+
 
 async function seedAlbums(client) {
   try {
+    const albums = await completeAlbums();
 
     // Create the "albums" table if it doesn't exist
-    const createTable = await client.sql`
+    await client.sql`
       CREATE TABLE IF NOT EXISTS albums (
         name VARCHAR(255) NOT NULL,
         artist VARCHAR(255) NOT NULL,
@@ -27,27 +28,25 @@ async function seedAlbums(client) {
     console.log(`Created "albums" table`);
 
     // Insert data into the "albums" table
-    const insertedAlbums = await Promise.all(
-      albums.map(async (album) => {
-        return client.sql`
-        INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary)
-        VALUES (${album.album.name}, ${album.album.artist},
-            ${album.album.image[0]["#text"]}, ${album.album.image[1]["#text"]},
-            ${album.album.image[2]["#text"]}, ${album.album.image[3]["#text"]},
-            ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
-            ${album.album.genre}, ${album.album.wiki.summary}
-        )
-        ON CONFLICT (name) DO NOTHING;
-      `;
-      }),
-    );
+    // Insertar datos en la tabla "albums" secuencialmente
+    for (const album of albums) {
+      try {
+        await client.sql`
+          INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary)
+          VALUES (${album.album.name}, ${album.album.artist},
+                  ${album.album.image[0]["#text"]}, ${album.album.image[1]["#text"]},
+                  ${album.album.image[2]["#text"]}, ${album.album.image[3]["#text"]},
+                  ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
+                  ${album.album.genre}, ${album.album.wiki ? album.album.wiki.summary : null}
+          )
+        `;
+      } catch (error) {
+        console.error(`Error inserting album: ${album.album.name}`, error);
+      }
+    }
 
-    console.log(`Seeded ${insertedAlbums.length} albums`);
+    console.log(`Seeded albums`);
 
-    return {
-      createTable,
-      albums: insertedAlbums,
-    };
   } catch (error) {
     console.error('Error seeding albums:', error);
     throw error;
