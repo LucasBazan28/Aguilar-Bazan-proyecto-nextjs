@@ -14,7 +14,7 @@ export default function Home() {
     <Header />
 
     <div style={{ height: '2000px' }}>
-      {/*<AlbumComponent /> */}  
+      {<AlbumComponent />}  
     </div>
     </>
   );
