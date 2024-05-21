@@ -1,8 +1,8 @@
-const { completeAlbums } = require('./placeholder-data');
+const { completeAlbums, user } = require('./placeholder-data');
 
 require('dotenv').config();
 const { db } = require('@vercel/postgres');
-
+const bcrypt = require('bcrypt');
 
 async function seedAlbums(client) {
   try {
@@ -53,10 +53,44 @@ async function seedAlbums(client) {
   }
 }
 
+async function seedUsers(client) {
+  try {
+    // Create the "users" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS usersB (
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "users" table`);
+    console.log(user.email);
+
+    // Insert data into the "users" table
+
+    try {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      await client.sql`
+        INSERT INTO usersB (email, password)
+        VALUES (${user.email}, ${hashedPassword})
+      `;
+    } catch (error) {
+      console.error(`Error inserting user: ${user.email}`, error);
+    }
+    
+    console.log(`Seeded user`);
+
+  } catch (error) {
+    console.error('Error seeding users:', error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
 
   await seedAlbums(client);
+  await seedUsers(client);
 
   await client.end();
 }

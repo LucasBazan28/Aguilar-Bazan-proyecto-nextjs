@@ -1,3 +1,9 @@
+const user = 
+    {
+      email: 'admin@admin.com',
+      password: 'admin',
+    }
+
 const PlaceHoldersData = [
     {
         artist: "Scorpions",
@@ -87,6 +93,7 @@ async function completeAlbums(){
      return albums;
 }
 module.exports = {
-    completeAlbums
+    completeAlbums, 
+    user
   };
 
