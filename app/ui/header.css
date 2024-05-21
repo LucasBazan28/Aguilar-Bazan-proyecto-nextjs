@@ -1,0 +1,49 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ddae78;
+    color: white;
+    transition: height 0.3s ease; /* Transición solo en la altura */
+    z-index: 1000;
+  }
+  
+  .header.expanded {
+    height: 100px; /* Tamaño del header expandido */
+  }
+  
+  .header.collapsed {
+    height: 50px; /* Tamaño del header contraído */
+  }
+  .header.expanded .logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Cuando el encabezado está colapsado, el logo tiene un tamaño menor */
+  .header.collapsed .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; /* Asegura que el contenedor llene todo el header */
+    padding: 0 20px;
+  }
+  
+  .header img {
+    margin: 0;
+    padding: 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text {
+    flex: 1; /* Permite que el texto ocupe el espacio necesario */
+    text-align: center; /* Centra el texto verticalmente */
+  }

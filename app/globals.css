@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  padding: 20px; /* Ajusta el valor según lo necesario */
-}
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.container h1 {
-  margin: 0; /* Ajusta el margen si es necesario */
-}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -30,11 +19,21 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to bottom,
+    transparent,
+    rgb(var(--background-end-rgb))
+  ) rgb(var(--background-start-rgb));
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px; /* Ajusta el valor según lo necesario */
+}
+
+.container h1 {
+  margin: 0; /* Ajusta el margen si es necesario */
 }
 
 @layer utilities {

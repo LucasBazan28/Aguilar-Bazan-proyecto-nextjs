@@ -2,19 +2,21 @@
 import Link from "next/link";
 import Head from "next/head";
 import "daisyui/dist/full.css";
+import Header from "./ui/topNav";
+import AlbumComponent from "./ui/albumsComponent";
 
 export default function Home() {
   return (
     <>
-    <div>
+    <Head>
+      <title>Home</title>
+    </Head>
 
+    <Header />
+
+    <div style={{ height: '2000px' }}>
+      {/*<AlbumComponent /> */}  
     </div>
-    <div className="container">
-    <h1>Home</h1>
-    <Link href="/login" passHref>
-    <button className="btn btn-outline btn-xs sm:btn-sm">Log In</button>
-    </Link> {/* This is a link to the login page*/}
-      </div>
     </>
   );
 }
