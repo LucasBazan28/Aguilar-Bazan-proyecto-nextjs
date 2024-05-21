@@ -17,7 +17,7 @@ const UsersPage = async () => {
     )
 }
 
-//export default UsersPage
+export default UsersPage
 /*import LoginForm from '@/app/ui/login-form';
  
 export default function LoginPage() {
