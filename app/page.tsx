@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Header from "./ui/topNav";
 import AlbumComponent from "./ui/albumsComponent";
 
 export default function Home() {
@@ -8,7 +7,7 @@ export default function Home() {
     <Head>
       <title>Home</title>
     </Head>
-    
+
     <AlbumComponent />
     </>
   );

@@ -35,6 +35,13 @@ body {
 .container h1 {
   margin: 0; /* Ajusta el margen si es necesario */
 }
+.albums-container{
+  display: grid;
+  /*grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));*/
+  gap:20px;
+  padding: 20px;
+  margin-top: 10%;
+}
 
 @layer utilities {
   .text-balance {
