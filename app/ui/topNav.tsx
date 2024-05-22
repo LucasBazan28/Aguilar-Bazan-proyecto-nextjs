@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import './header.css';
 import Link from 'next/link';
 import Logo from './logo';
-import SideMenu from './sideMenu';
 
 const Header = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
