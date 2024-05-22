@@ -2,7 +2,6 @@
 
 import React, { useState, useLayoutEffect } from 'react';
 import { fetchAllAlbums } from '@/app/lib/data';
-import 'tailwindcss/tailwind.css';
 
 export default async function AlbumsComponent() {
   const albums = await fetchAllAlbums();
