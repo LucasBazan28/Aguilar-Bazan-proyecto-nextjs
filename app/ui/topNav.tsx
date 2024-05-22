@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './header.css';
 import Link from 'next/link';
 import Logo from './logo';
-import 'tailwindcss/tailwind.css';
 
 const Header = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
