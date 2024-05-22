@@ -5,15 +5,15 @@
     background-color: #ddae78;
     color: white;
     transition: height 0.3s ease; /* Transición solo en la altura */
-    z-index: 1000;
+    z-index: 1000; /* Asegura que el encabezado esté sobre otros elementos */
   }
   
   .header.expanded {
-    height: 100px; /* Tamaño del header expandido */
+    height: 150px; /* Tamaño del header expandido */
   }
   
   .header.collapsed {
-    height: 50px; /* Tamaño del header contraído */
+    height: 75px; /* Tamaño del header contraído */
   }
   .header.expanded .logo {
     width: 100px;
@@ -22,8 +22,8 @@
   
   /* Cuando el encabezado está colapsado, el logo tiene un tamaño menor */
   .header.collapsed .logo {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
   }
   
   .header .container {

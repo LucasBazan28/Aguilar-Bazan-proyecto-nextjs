@@ -1,10 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import './header.css';
 const Logo = () => {
   return (
     <div className="logo">
-        <div className="text">Timeless</div>
         <div className="logo-image">
             <Image
             src="/images/Timeless_Sounds_Logo.png"
@@ -13,7 +12,6 @@ const Logo = () => {
             objectFit="contain" // Mantiene el aspecto original de la imagen
             />
       </div>
-      <div className="text">Sounds</div>
   </div>
   );
 };

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './header.css';
 import Link from 'next/link';
 import Logo from './logo';
-import SideMenu from './sideMenu';
+import 'tailwindcss/tailwind.css';
 
 const Header = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrollingUp ? 'expanded' : 'collapsed'}`}>
-      <div className="container">
+      <div className="container mx-auto">
         <Logo />
         <Link href="/login" passHref>
           <button className="btn btn-outline btn-xs sm:btn-sm">Log In</button>
