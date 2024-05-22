@@ -11,3 +11,8 @@ export type Album = {
     genre: string,
     summary: string
   };
+
+  export type User = {
+    email: string;
+    password: string
+  };
