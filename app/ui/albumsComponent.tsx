@@ -1,22 +1,10 @@
 // ./components/AlbumsComponent.tsx
 
-"use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { fetchAllAlbums } from '@/app/lib/data';
 import 'tailwindcss/tailwind.css';
 
 export default async function AlbumsComponent() {
-  /*const [albums, setAlbums] = useState<Album[]>([]);
-
-  useEffect(() => {
-    const getAlbums = async () => {
-      const allAlbums = await fetchAllAlbums();
-      setAlbums(allAlbums);
-    };
-
-    getAlbums();
-  }, []);*/
-
   const albums = await fetchAllAlbums();
   return (
     <div className="container mx-auto py-6">
