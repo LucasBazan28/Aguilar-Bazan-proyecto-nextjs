@@ -3,9 +3,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx},\r\n    ./components/**/*.{js,ts,jsx,tsx,mdx},\r\n    ./app/**/*.{js,ts,jsx,tsx,mdx},",
-    "./node_modules/@nextui-org/theme/dist/components/(button|ripple|spinner).js"
-  ],
+    "./node_modules/@nextui-org/theme/dist/components/(card|ripple).js"
+],
   theme: {
     extend: {
       backgroundImage: {

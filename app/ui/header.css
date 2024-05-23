@@ -5,25 +5,25 @@
     background-color: #ddae78;
     color: white;
     transition: height 0.3s ease; /* Transición solo en la altura */
-    z-index: 1000; /* Asegura que el encabezado esté sobre otros elementos */
+    z-index: 1000;
   }
   
   .header.expanded {
-    height: 150px; /* Tamaño del header expandido */
+    height: 15%; /* Tamaño del header expandido */
   }
   
   .header.collapsed {
-    height: 75px; /* Tamaño del header contraído */
+    height: 9%; /* Tamaño del header contraído */
   }
   .header.expanded .logo {
-    width: 100px;
-    height: 100px;
+    width: 10%;
+    height: 100%;
   }
   
   /* Cuando el encabezado está colapsado, el logo tiene un tamaño menor */
   .header.collapsed .logo {
-    width: 75px;
-    height: 75px;
+    width: 8%;
+    height: 100%;
   }
   
   .header .container {
@@ -33,17 +33,32 @@
     height: 100%; /* Asegura que el contenedor llene todo el header */
     padding: 0 20px;
   }
-  
-  .header img {
-    margin: 0;
-    padding: 0;
-  }
+
   .logo {
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+  }
+  .logo-image {
+    position: relative; /* Necesario para que Image con layout="fill" funcione correctamente */
+    width: 100%; /* Asegura que el contenedor ocupe el ancho disponible */
+    height: 100%; /* Asegura que el contenedor ocupe la altura disponible */
+  }
+  .log-in-button{
+    z-index: 1000;
+  }
+
+  .header button {
+    background-color: transparent;
+    color: #ffffff; /* text-white */
+    font-weight: 500; /* font-bold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border: 2px solid #ffffff;
+    border-radius: 0.375rem; /* rounded */
+    transition: background-color 0.3s ease; /* Añadido para transición en el hover */
   }
   
-  .text {
-    flex: 1; /* Permite que el texto ocupe el espacio necesario */
-    text-align: center; /* Centra el texto verticalmente */
+  .header button:hover {
+    background-color: #75420060;
   }

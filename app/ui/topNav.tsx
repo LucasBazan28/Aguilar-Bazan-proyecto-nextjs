@@ -32,8 +32,8 @@ const Header = () => {
     <header className={`header ${isScrollingUp ? 'expanded' : 'collapsed'}`}>
       <div className="container mx-auto">
         <Logo />
-        <Link href="/login" passHref>
-          <button className="btn btn-outline btn-xs sm:btn-sm">Log In</button>
+        <Link href="/prueba" passHref>
+          <button className="log-in-button text-sm lg:text-md">Log In</button>
         </Link>
       </div>
     </header>

@@ -29,18 +29,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px; /* Ajusta el valor según lo necesario */
 }
 
-.container h1 {
-  margin: 0; /* Ajusta el margen si es necesario */
-}
 .albums-container{
   display: grid;
-  /*grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));*/
   gap:20px;
-  padding: 20px;
-  margin-top: 10%;
+  /*padding top =0, left = 4%, right = 5%*/
+  padding: 2% 4% 0 5%;
+  margin-top: 9%;
+  /*padding: 20px;*/
 }
 
 @layer utilities {
