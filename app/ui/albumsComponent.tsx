@@ -12,15 +12,16 @@ export default async function AlbumsComponent() {
       <Card key={album.name} className="py-4">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-tiny uppercase font-bold">{album.name}</p>
-        <small className="text-default-500">{album.listeners}</small>
-        <h4 className="font-bold text-large">{album.genre}</h4>
+        <small className="text-default-500">Listeners: {album.listeners}</small>
+        <h4 className="font-bold text-large">Genre: {album.genre}</h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <Image
           alt=""
           className="object-cover rounded-xl"
-          src={album.mediumImage}
-          width={270}
+          src={album.mediumimage}
+          width={50}
+          height={50}
         />
       </CardBody>
       </Card>
