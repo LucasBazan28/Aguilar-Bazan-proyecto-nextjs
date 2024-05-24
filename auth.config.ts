@@ -22,6 +22,7 @@ export const authConfig = {
 //EL CODIGO DE ARRIBA ES EL DEL TUTORIAL, SE PUEDE USAR MÁS ADELANTE PERO POR AHORA PARA TESTEAR USUARIOS USAMOS ESTE
 
 import type { NextAuthConfig } from 'next-auth';
+import {redirect} from "next/navigation";
 
 export const authConfig = {
   pages: {
@@ -31,12 +32,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnLogin = nextUrl.pathname.startsWith('/login');
-      console.log(isOnLogin);
-      console.log(isLoggedIn);
       if (isOnLogin) {
-        if (isLoggedIn) {
-          return Response.redirect("http://localhost:3000");
-        }
         return true; // Allow access to the login page
       } else if (!isLoggedIn) {
         return false;
@@ -45,6 +41,20 @@ export const authConfig = {
       return true;
   
     },
+    async redirect({ url, baseUrl }) {
+      const params = new URL(url).searchParams
+      const callbackUrl = params.get('callbackUrl')
+      if(callbackUrl){
+        url = callbackUrl
+      }
+
+      // base behaviour:
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    }
   },
   providers: [], // Agrega los proveedores aquí
 } satisfies NextAuthConfig;
