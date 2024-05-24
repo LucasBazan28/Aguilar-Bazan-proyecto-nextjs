@@ -34,7 +34,7 @@ export const authConfig = {
       const isOnLogin = nextUrl.pathname.startsWith('/login');
       if (isOnLogin) {
         if (isLoggedIn) {
-          return Response.redirect("http://localhost:3000");
+          return Response.redirect(new URL("/", nextUrl));
         }
         return true; // Allow access to the login page
       } else if (!isLoggedIn) {
