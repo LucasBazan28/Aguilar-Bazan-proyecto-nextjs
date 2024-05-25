@@ -2,6 +2,10 @@
 import { useEffect, useState } from 'react';
 import {Album} from "@/app/lib/definitions"
 import Image from 'next/image';
+import { Inter } from 'next/font/google'
+ 
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({ subsets: ['latin'] })
 
 export default function ProductPage() {
   const [album, setAlbum] = useState<Album | null>(null);
@@ -16,20 +20,24 @@ export default function ProductPage() {
     }
   }, []);
 
+  const summary = album?.summary?.replace(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>.*?<\/a>/gi, '') ?? '';
+
   return (
     <div>
 
-      <main className="flex justify-center min-h-screen min-w-screen">
-        <div className="w-full h-full justify-center flex-col p-4">
+    <main className="flex min-h-screen min-w-screen">
+        <div className="ml-8 w-full h-full flex-col p-4 mr-8">
           {album && (
             <>
               <div className="text-4xl font-bold text-white mb-4 mt-4">Name: {album.name}</div>
-              <ul className="text-white list-none space-y-2 mb-8">
+              <ul className={`${inter.className} text-white list-none space-y-2 mb-8`}>
                 <li>Artist: {album.artist}</li>
                 <li>Listeners: {album.listeners}</li>
                 <li>Genre: {album.genre}</li>
               </ul>
-              <div className = "flex align-center justify-center w-1/5 h-1/5">
+              
+              {album.extralargeimage &&
+              (<div className = "flex justify-center sm:w-full sm:h-full md:w-1/5 md:h-1/5">
                 <div className="relative w-full h-full">
                   <Image
                     src={album.extralargeimage}
@@ -39,8 +47,11 @@ export default function ProductPage() {
                     height={300}
                   />
                 </div>
-              </div>
-              <div className="justify-center text-white mt-8 mb-8">Summary: {album.summary}</div>
+              </div>)}
+              {summary && (<div className={`${inter.className} justify-center text-white mt-8 sm:mr-8 md:mr-40 prose`}>
+                    Summary: {summary}
+              </div>)
+              }
             </>
           )}
           
