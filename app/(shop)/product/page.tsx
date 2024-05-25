@@ -25,10 +25,12 @@ export default function ProductPage() {
   return (
     <div>
 
-    <main className="flex min-h-screen min-w-screen">
+    <div className="flex min-h-screen min-w-screen">
         <div className="ml-8 w-full h-full flex-col p-4 mr-8">
           {album && (
             <>
+              <div className="mt-custom">
+              </div>
               <div className="text-4xl font-bold text-white mb-4 mt-4">Name: {album.name}</div>
               <ul className={`${inter.className} text-white list-none space-y-2 mb-8`}>
                 <li>Artist: {album.artist}</li>
@@ -44,7 +46,7 @@ export default function ProductPage() {
                     className="object-cover rounded-xl h-full w-full"
                     alt={album.name}
                     width={300}
-                    height={300}
+                    height={300} 
                   />
                 </div>
               </div>)}
@@ -56,7 +58,7 @@ export default function ProductPage() {
           )}
           
         </div>
-      </main>
+      </div>
       
     </div>
   );
