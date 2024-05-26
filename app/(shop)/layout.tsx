@@ -12,12 +12,19 @@ export const metadata: Metadata = {
 export default function Layout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode; 
 }>) {
   return (
-      <div>
-        <Header />
-        {children}
-      </div>
+      //el div que envuelve children hace que ya no se vea un espacio blanco en la pag principal
+
+      <>
+          <Header />
+          
+          <div className="flex flex-col overflow-y-auto"> 
+            {children}
+          </div>
+        </>
+    
+        
   );
 }
