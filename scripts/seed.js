@@ -21,7 +21,9 @@ async function seedAlbums(client) {
         lastFmUrl VARCHAR(255),
         listeners INT, 
         genre VARCHAR(255),
-        summary TEXT
+        summary TEXT,
+        price NUMERIC(10, 2),
+        cantidadComprada smallint
       );
     `;
 
@@ -32,12 +34,13 @@ async function seedAlbums(client) {
     for (const album of albums) {
       try {
         await client.sql`
-          INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary)
+          INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary, price, cantidadComprada)
           VALUES (${album.album.name}, ${album.album.artist},
                   ${album.album.image[0]["#text"]}, ${album.album.image[1]["#text"]},
                   ${album.album.image[2]["#text"]}, ${album.album.image[3]["#text"]},
                   ${album.album.image[4]["#text"]}, ${album.album.url}, ${parseInt(album.album.listeners, 10)},
-                  ${album.album.genre}, ${album.album.wiki ? album.album.wiki.summary : null}
+                  ${album.album.genre}, ${album.album.wiki ? album.album.wiki.summary : null}, ${album.album.price},
+                  ${album.album.cantidadComprada}
           )
         `;
       } catch (error) {
@@ -52,6 +55,27 @@ async function seedAlbums(client) {
     throw error;
   }
 }
+
+async function seedCarts(client) {
+  try {
+    // Create the "carts" table if it doesn't exist
+    await client.sql`
+      CREATE TABLE carts (
+        email VARCHAR(255) NOT NULL,
+        products JSONB NOT NULL DEFAULT '[]'
+    );
+    `;
+
+    console.log(`Created "Carts" table`);
+
+    // Insert data into the "carts" table
+
+  } catch (error) {
+    console.error('Error seeding carts:', error);
+    throw error;
+  }
+}
+
 
 async function seedUsers(client) {
   try {
@@ -91,6 +115,7 @@ async function main() {
 
   await seedAlbums(client);
   await seedUsers(client);
+  await seedCarts(client);
 
   await client.end();
 }
