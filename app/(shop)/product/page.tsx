@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import {Album} from "@/app/lib/definitions"
 import Image from 'next/image';
 import { Inter } from 'next/font/google'
+import { CartProvider } from '@/app/contexts/cartContext';
+import { manageProductInCart } from '@/app/ui/manageProductInCart';
  
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
@@ -50,10 +52,15 @@ export default function ProductPage() {
                   />
                 </div>
               </div>)}
-              {summary && (<div className={`${inter.className} justify-center text-white mt-8 sm:mr-8 md:mr-40 prose`}>
+              {summary && (<div className={`${inter.className} justify-center text-white mt-8 mb-8 sm:mr-8 md:mr-40 prose`}>
                     Summary: {summary}
               </div>)
               }
+
+              <CartProvider>
+                {manageProductInCart(album)}
+              </CartProvider>
+              
             </>
           )}
           
