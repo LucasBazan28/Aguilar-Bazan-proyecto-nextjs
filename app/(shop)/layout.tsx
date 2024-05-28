@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "../ui/topNav";
+import { CartProvider } from "../contexts/cartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +21,12 @@ export default function Layout({
 
       <>
           <Header />
+          <CartProvider>
+            <div className="flex flex-col overflow-y-auto"> 
+              {children}
+            </div>
+          </CartProvider>
           
-          <div className="flex flex-col overflow-y-auto"> 
-            {children}
-          </div>
         </>
     
         

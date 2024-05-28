@@ -1,6 +1,6 @@
-import { useState, createContext, ReactNode } from 'react'
+"use client";
+import { useState, useEffect, createContext, ReactNode } from 'react'
 import { AlbumInCart, CartContextType } from '../lib/definitions';
-
 
   
 export const CartContext = createContext<CartContextType>({
@@ -12,15 +12,18 @@ export const CartContext = createContext<CartContextType>({
     clearCart: () => {}
 });
 
-const cartItem = window.localStorage.getItem('cart');
-const cartInitialState: AlbumInCart[] = cartItem ? JSON.parse(cartItem) : [];
-
 const updateLocalStorage = (cart: AlbumInCart[]) => {
     window.localStorage.setItem('cart', JSON.stringify(cart));
   };
 
 export function useCart() {
-    const [cart, setCartState] = useState<AlbumInCart[]>(cartInitialState);
+  const [cart, setCartState] = useState<AlbumInCart[]>([]);
+
+  useEffect(() => {
+      const cartItem = window.localStorage.getItem('cart');
+      const cartInitialState: AlbumInCart[] = cartItem ? JSON.parse(cartItem) : [];
+      setCartState(cartInitialState);
+  }, []);
   
     const addOneToCart = (product: AlbumInCart) => {
         setCartState(prevState => {

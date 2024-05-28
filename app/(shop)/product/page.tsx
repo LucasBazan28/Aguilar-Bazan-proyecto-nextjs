@@ -1,10 +1,8 @@
 "use client";
-
 import { useEffect, useState } from 'react';
 import {Album} from "@/app/lib/definitions"
 import Image from 'next/image';
 import { Inter } from 'next/font/google'
-import { CartProvider } from '@/app/contexts/cartContext';
 import { ManageProductInCart } from '@/app/ui/manageProductInCart';
  
 // If loading a variable font, you don't need to specify the font weight
@@ -58,9 +56,9 @@ export default function ProductPage() {
               </div>)
               }
             
-              <CartProvider>
+              
                 <ManageProductInCart album={album}/>
-              </CartProvider>
+             
               
             </>
           )}

@@ -1,6 +1,4 @@
-"use client";
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '@/app/contexts/cartContext';
+import { useCart} from '@/app/hooks/useCart';
 import { AlbumInCart } from '../lib/definitions';
 import {Album} from '../lib/definitions';
 import { RemoveFromCartIcon, AddToCartIcon } from './cartIcons';
@@ -12,7 +10,7 @@ type ManageProductInCartProps = {
 export function ManageProductInCart({ album }: ManageProductInCartProps) {
   
 
-  const { cart, addOneToCart, removeOneFromCart, setProductQuantity } = useContext(CartContext);
+  const { cart, addOneToCart, removeOneFromCart, setProductQuantity } = useCart();
   const albumInCart = cart.find(item => item.name === album.name);
   const InitialQuantity: number = albumInCart ? albumInCart.quantity : 0;
 
