@@ -12,7 +12,7 @@ const AlbumCard = (album: Album) => {
   return (
     <Card key={album.name} className="py-4">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold">{album.name}</p>
+        <p className="text-small uppercase font-bold">{album.name}</p>
         <small className="text-default-500">Listeners: {album.listeners}</small>
         <h4 className="font-bold text-large">Genre: {album.genre}</h4>
       </CardHeader>

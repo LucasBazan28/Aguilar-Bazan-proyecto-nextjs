@@ -1,15 +1,36 @@
 import Head from "next/head";
 import AlbumsComponent from "../ui/albumsComponent";
 import { signOut } from '@/auth';
+import { useState } from "react";
+
+//Si tomase datos de un json haría: import {albums as initialAlbums} from "../mock/albums.json";
+import { filtersComponent } from "../ui/filtersComponent";
 
 export default function Home() {
+  //const [albums] = useState(initialAlbums);
+  const [filters, setFilters] = useState({
+    genre: "all",
+    //minPrice: 0,
+    //maxPrice: 1000,
+  });
+
+  const filterAlbums = (albums) => {
+    return albums.filter((album) => {
+      return (
+        (filters.genre === "all" || album.genre === filters.genre)
+        //&& (filters.minPrice <= album.price && album.price <= filters.maxPrice)
+      );
+    });
+  }
+
+  const filteredAlbums = filterAlbums(albums);
   return (
     <>
     <Head>
       <title>Home</title>
     </Head>
-    
-    <AlbumsComponent />
+    <filtersComponent changeFilters={setFilters}/>
+    <AlbumsComponent albums = filteredAlbums={}/>
     <form
           action={async () => {
             'use server';
