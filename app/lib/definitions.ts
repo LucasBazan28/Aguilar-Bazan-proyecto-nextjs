@@ -22,8 +22,8 @@ export type Album = {
 export type AlbumInCart = {
     name: string,
     artist: string,
-    quantity: number,
-
+    price: number,
+    quantity: number
 } 
 
 export type CartContextType = {
