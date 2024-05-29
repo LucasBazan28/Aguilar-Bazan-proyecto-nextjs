@@ -24,7 +24,7 @@ const HomeCarousel: React.FC = () => {
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
           fill
-          objectFit="cover"
+          style={{ objectFit: 'cover' }}
           className="transition-opacity duration-500 ease-in-out"
         />
       </div>
