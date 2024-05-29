@@ -34,3 +34,9 @@ export type CartContextType = {
   setProductQuantity: (product: AlbumInCart, quantity: number) => void;
   clearCart: () => void;
 }
+
+export type Filters = {
+  genre: string,
+  minPrice: number,
+  maxPrice: number
+}

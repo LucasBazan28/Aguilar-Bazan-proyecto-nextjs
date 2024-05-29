@@ -1,11 +1,28 @@
+"use client";
 import { useState } from "react"
+import { Album } from "../lib/definitions"
 
-export function filtersComponent({changeFilters}){
+type FiltersComponentProps = {
+    setFilters: React.Dispatch<React.SetStateAction<{ genre: string; minPrice: number; maxPrice: number }>>;
+  };
+export const FiltersComponent: React.FC<FiltersComponentProps> = ({ setFilters }: FiltersComponentProps) => {
     const [minPrice, setMinPrice] = useState(0)
 
-    const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMinPrice(Number(event.target.value))
-    }
+    const handleGenreChange = (event: { target: { value: any; }; }) => {
+        setFilters((prevFilters: any) => ({
+          ...prevFilters,
+          genre: event.target.value,
+        }));
+      };
+    
+      const handleChangeMinPrice = (event: { target: { value: any; }; }) => {
+        const value = Number(event.target.value);
+        setMinPrice(value);
+        setFilters((prevFilters: any) => ({
+          ...prevFilters,
+          minPrice: value,
+        }));
+      };
 
     return (
         /*</section>*/
@@ -16,7 +33,7 @@ export function filtersComponent({changeFilters}){
                 <option value="all">Todos</option>
                 <option value="Rock">Rock</option>
                 <option value="Metal">Metal</option>
-                <option value="Pop">Pop</option>2
+                <option value="Pop">Pop</option>
             </select>
         </div>
         <div className="flex flex-col gap-4">
