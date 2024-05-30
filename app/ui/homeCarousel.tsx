@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
 
@@ -18,7 +19,7 @@ const HomeCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-64 overflow-hidden">
+    <div className="relative w-full h-64 overflow-hidden z-20 mt-36">
       <div className="absolute inset-0 flex items-center justify-center">
         <Image
           src={images[currentIndex]}

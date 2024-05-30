@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <header className={`header ${isScrollingUp ? 'expanded' : 'collapsed'}`}>
-      <div className="container mx-auto shadow-lg">
+      <div className="container mx-auto">
         <Logo />
         <div className="flex space-x-4">
           <Link href="/cart" passHref>

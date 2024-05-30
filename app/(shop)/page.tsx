@@ -1,34 +1,33 @@
-"use client";
-import Head from "next/head";
 import AlbumsComponent from "../ui/albumsComponent";
 import {logOut } from '@/app/lib/actions';
-import { useState } from "react";
-import { FiltersComponent } from "../ui/filtersComponent";
 import HomeCarousel from "../ui/homeCarousel";
+import Search from "../ui/Search";
+import {Suspense} from 'react';
 
-export default function Home() {
-  const [filters, setFilters] = useState({
-    genre: "all",
-    minPrice: 0,
-    maxPrice: 1000,
-  });
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
 
  
   return (
     <>
-    <Head>
-      <title>Home</title> 
-    </Head>
 
-    {/*PONER CARROUSSEL DE IMAGENES AQUI*/}
-    <HomeCarousel/>
+    {/*<HomeCarousel/>*/}
+    {/*<Search placeholder="Search Albums"/>Componente que sirve para la búsqueda
+    Si lo descomentamos aquí queda oculto detrás del topNav*/}
+
     <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-1/6 p-4">
-          <FiltersComponent setFilters={setFilters} />
-        </div>
-        <div className="w-full md:w-5/6 p-4">
-          <AlbumsComponent filters={filters} />
-        </div>
+      <div className="w-full md:w-5/6 p-4 overflow-y-auto">
+        <AlbumsComponent/>
+      </div>
     </div>
     <form
           action={logOut}
