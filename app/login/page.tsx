@@ -1,8 +1,14 @@
 
 import LoginForm from '@/app/ui/login-form';
 import Logo from '@/app/ui/logo';
- 
-export default function LoginPage() {
+import { auth } from '@/auth';
+import {redirect} from "next/navigation";
+
+
+export default async function LoginPage() {
+  const isLoggedIn = await auth() != null;
+  if (isLoggedIn)
+    redirect("/")
   return (
     <>
     <main className="flex items-center justify-center min-h-screen">

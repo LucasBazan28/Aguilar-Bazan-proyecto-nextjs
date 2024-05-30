@@ -1,18 +1,10 @@
-"use client";
 import Head from "next/head";
 import AlbumsComponent from "../ui/albumsComponent";
 import {logOut } from '@/app/lib/actions';
-import { useState } from "react";
 import { FiltersComponent } from "../ui/filtersComponent";
 import HomeCarousel from "../ui/homeCarousel";
 
 export default function Home() {
-  const [filters, setFilters] = useState({
-    genre: "all",
-    minPrice: 0,
-    maxPrice: 1000,
-  });
-
  
   return (
     <>
@@ -23,12 +15,7 @@ export default function Home() {
     {/*PONER CARROUSSEL DE IMAGENES AQUI*/}
     <HomeCarousel/>
     <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-1/6 p-4">
-          <FiltersComponent setFilters={setFilters} />
-        </div>
-        <div className="w-full md:w-5/6 p-4">
-          <AlbumsComponent filters={filters} />
-        </div>
+
     </div>
     <form
           action={logOut}

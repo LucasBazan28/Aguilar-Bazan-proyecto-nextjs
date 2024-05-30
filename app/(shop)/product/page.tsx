@@ -1,5 +1,6 @@
-"use client";
-import { useEffect, useState } from 'react';
+export default function Page(){return <div/>}
+
+/*import { useEffect, useState } from 'react';
 import {Album} from "@/app/lib/definitions"
 import Image from 'next/image';
 import { Inter } from 'next/font/google'
@@ -68,4 +69,4 @@ export default function ProductPage() {
       
     </div>
   );
-}
+}*/

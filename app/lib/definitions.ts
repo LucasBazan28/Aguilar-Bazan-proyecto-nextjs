@@ -40,3 +40,12 @@ export type Filters = {
   minPrice: number,
   maxPrice: number
 }
+
+export type UserType = {
+  email: string;
+  password: string;
+}
+
+export type AuthType = {
+  user?: UserType;
+}
