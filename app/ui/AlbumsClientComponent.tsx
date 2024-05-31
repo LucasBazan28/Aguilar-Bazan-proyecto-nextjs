@@ -37,7 +37,7 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
   return (
     <>
     <div className="filters-container">
-        <div className="flex flex-col gap-4">
+        <div className="w-full md:w-1/6 flex flex-col gap-4">
             <label htmlFor="genre" className="text-lg font-medium">Genre</label>
             <select id="genre" value={filters.genre} onChange={handleGenreChange}>
               <option value="all">Todos</option>
@@ -60,7 +60,7 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
           <span>${filters.minPrice}</span>
         </div>
     </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 albums-container">
+      <div className= "w-full md:w-5/6 p-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 albums-container">
         {filteredAlbums.map(album => (
           <AlbumCard key={album.name} {...album} />
         ))}

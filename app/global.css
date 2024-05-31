@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.albums-container {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 2, 22;
@@ -34,15 +29,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.albums-container{
-  display: grid;
-  gap:20px;
-  /*padding top =0, left = 4%, right = 5%*/
-  padding: 2% 4% 0 5%;
-  margin-top: 9%;
-  /*padding: 20px;*/
 }
 
 @layer utilities {

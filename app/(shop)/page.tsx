@@ -20,15 +20,12 @@ export default async function Home({
     <>
 
     <HomeCarousel/>
-    {/*<Search placeholder="Search Albums"/>Componente que sirve para la búsqueda
-    Si lo descomentamos aquí queda oculto detrás del topNav*/}
+   <Search placeholder="Search Albums"/>
 
     <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-5/6 p-4">
-        <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
-          <AlbumsComponent query={query} currentPage={currentPage} />
-        </Suspense>
-      </div>
+      <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
+        <AlbumsComponent query={query} currentPage={currentPage} />
+      </Suspense>      
     </div>
     <form
           action={logOut}
