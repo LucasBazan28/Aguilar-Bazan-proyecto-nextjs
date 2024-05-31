@@ -49,3 +49,47 @@ export async function fetchAlbumsWithGender(genre: string) {  //el parametro del
         throw new Error('Failed to fetch the albums.');
     }
 }
+
+export async function fetchTopListened() {
+  noStore();
+  try {
+    const topListenedAlbumsQuery = await sql<Album>`
+      SELECT * FROM albums
+      ORDER BY listeners DESC
+      LIMIT 5
+    `;
+    return topListenedAlbumsQuery.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the albums.');
+  }
+}
+
+export async function fetchTopSelled() {
+  noStore();
+  try {
+    const topSelledAlbumsQuery = await sql<Album>`
+      SELECT * FROM albums
+      ORDER BY cantidadComprada DESC
+      LIMIT 5
+    `;
+    return topSelledAlbumsQuery.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the albums.');
+  }
+}
+
+export async function fetchAlbumByName(name: string){
+  try {
+    const albumQuery = await sql<Album>`
+      SELECT * FROM albums
+      WHERE LOWER(name) = LOWER(${name})
+      LIMIT 1
+    `;
+    return albumQuery.rows[0] || null;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the album.');
+  }
+}
