@@ -10,8 +10,16 @@ export default async function AlbumsComponent({ query, currentPage }: { query: s
 
   return (
     <>
-      <AlbumsClientComponent initialAlbums={albums} />
-      <Pagination totalPages={totalPages} />
+      {albums.length > 0 ? (
+        <>
+          <AlbumsClientComponent initialAlbums={albums} />
+          <div className="mt-4">
+            <Pagination totalPages={totalPages} />
+          </div>
+        </>
+      ) : (
+        <p>Sorry, we couldn´t find the album you´re looking for.</p>
+      )}
     </>
   );
 }

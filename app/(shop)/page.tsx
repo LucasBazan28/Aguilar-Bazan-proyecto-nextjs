@@ -20,7 +20,7 @@ export default async function Home({
     <>
 
     <HomeCarousel/>
-   <Search placeholder="Search Albums"/>
+    <Search placeholder="Search Albums"/>
 
     <div className="flex flex-col md:flex-row">
       <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
