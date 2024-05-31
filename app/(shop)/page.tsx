@@ -4,7 +4,7 @@ import HomeCarousel from "../ui/homeCarousel";
 import Search from "../ui/Search";
 import {Suspense} from 'react';
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
   searchParams?: {
@@ -15,18 +15,19 @@ export default function Home({
   
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
-
  
   return (
     <>
 
-    {/*<HomeCarousel/>*/}
+    <HomeCarousel/>
     {/*<Search placeholder="Search Albums"/>Componente que sirve para la búsqueda
     Si lo descomentamos aquí queda oculto detrás del topNav*/}
 
     <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-5/6 p-4 overflow-y-auto">
-        <AlbumsComponent/>
+      <div className="w-full md:w-5/6 p-4">
+        <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
+          <AlbumsComponent query={query} currentPage={currentPage} />
+        </Suspense>
       </div>
     </div>
     <form

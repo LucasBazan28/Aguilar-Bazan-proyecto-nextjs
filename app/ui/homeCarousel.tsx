@@ -19,14 +19,14 @@ const HomeCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-64 overflow-hidden z-20 mt-36">
+    <div className="relative w-full h-64 overflow-hidden z-20 mt-16">
       <div className="absolute inset-0 flex items-center justify-center">
         <Image
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
           fill
           style={{ objectFit: 'cover' }}
-          className="transition-opacity duration-500 ease-in-out"
+          className="transition-opacity duration-900 ease-in-out"
         />
       </div>
       <button

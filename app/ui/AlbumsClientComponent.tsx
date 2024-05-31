@@ -41,9 +41,9 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
             <label htmlFor="genre" className="text-lg font-medium">Genre</label>
             <select id="genre" value={filters.genre} onChange={handleGenreChange}>
               <option value="all">Todos</option>
-              <option value="Rock">Rock</option>
-              <option value="Metal">Metal</option>
-              <option value="Pop">Pop</option>
+              <option value="rock">Rock</option>
+              <option value="metal">Metal</option>
+              <option value="pop">Pop</option>
             </select>
         </div>
      
