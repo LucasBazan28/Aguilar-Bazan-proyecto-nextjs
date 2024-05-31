@@ -98,7 +98,6 @@ export async function fetchAlbumsPages(query: string) {
 }
 
 export async function fetchTopListened() {
-  noStore();
   try {
     const topListenedAlbumsQuery = await sql<Album>`
       SELECT * FROM albums
@@ -113,7 +112,6 @@ export async function fetchTopListened() {
 }
 
 export async function fetchTopSelled() {
-  noStore();
   try {
     const topSelledAlbumsQuery = await sql<Album>`
       SELECT * FROM albums
