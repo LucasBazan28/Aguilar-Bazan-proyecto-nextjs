@@ -83,13 +83,18 @@ export default function AdminPage() {
           aria-live="polite"
           aria-atomic="true"
         >
-          {errorMessage && (
+        {errorMessage && errorMessage !== "El álbum ya se encuentra disponible" && (
+        <>
+            <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+            <p className="text-sm text-red-500">{errorMessage + ". Por favor ingrese el album en forma manual"}</p>
+         </>
+        )}
+        {errorMessage === "El álbum ya se encuentra disponible" && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage+"."}</p>
-              <p className="text-sm text-red-500">Por favor ingrese el álbum de forma manual</p>
+                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <p className="text-sm text-red-500">{errorMessage + "."}</p>
             </>
-          )}
+        )}
         </div>
       </form>
     </div>

@@ -33,7 +33,8 @@ export async function authenticate(
     prevState: string | undefined,
     formData: FormData
 ) {
-
+  let inserted = false;
+  try{
       const artist = formData.get('artist') as string ;
       const album = formData.get('albumName') as string;
 
@@ -49,31 +50,48 @@ export async function authenticate(
         // Si no hay error pero el JSON no tiene el atributo 'images' o 'images[0].text' está vacío
         return ("El album encontrado no tiene los atributos suficientes");
       } else {
-        data.album.genre = formData.get('genre') as string ;
-        const priceValue = formData.get('price');
+        const result = await sql`SELECT * FROM albums WHERE LOWER(name) = LOWER(${album})`;
 
-        let price: number | null = null;
-
-        if (typeof priceValue === 'string') {
-        // Solo si priceValue es una cadena, convertir a número
-          price = parseFloat(priceValue);
+        // El resultado de la consulta EXISTS será un objeto con una propiedad 'exists'
+        if (result.rows.length > 0) {
+          return "El álbum ya se encuentra disponible";
         }
+        else{
+          inserted = true;
 
-        data.album.price = price;
-        data.album.cantidadComprada = 0;
-        await sql`
-          INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary, price, cantidadComprada)
-          VALUES (${data.album.name}, ${data.album.artist},
-                  ${data.album.image[0]["#text"]}, ${data.album.image[1]["#text"]},
-                  ${data.album.image[2]["#text"]}, ${data.album.image[3]["#text"]},
-                  ${data.album.image[4]["#text"]}, ${data.album.url}, ${parseInt(data.album.listeners, 10)},
-                  ${data.album.genre}, ${data.album.wiki ? data.album.wiki.summary : null}, ${data.album.price},
-                  ${data.album.cantidadComprada}
-          )
-        `;
-        revalidatePath('/');
-        redirect('/');
-      }
+          data.album.genre = formData.get('genre') as string ;
+          const priceValue = formData.get('price');
 
+          let price: number | null = null;
+
+          if (typeof priceValue === 'string') {
+            // Solo si priceValue es una cadena, convertir a número
+            price = parseFloat(priceValue);
+          }
+
+          data.album.price = price;
+          data.album.cantidadComprada = 0;
+          await sql`
+            INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary, price, cantidadComprada)
+            VALUES (${data.album.name}, ${data.album.artist}, NULLIF(${data.album.image[0]["#text"]}, ''), 
+            NULLIF(${data.album.image[1]["#text"]}, ''), NULLIF(${data.album.image[2]["#text"]}, ''), 
+            NULLIF(${data.album.image[3]["#text"]}, ''), NULLIF(${data.album.image[4]["#text"]}, ''), 
+            ${data.album.url ? data.album.url: null}, ${parseInt(data.album.listeners, 10)},
+            ${data.album.genre}, ${data.album.wiki ? data.album.wiki.summary : null}, 
+            ${data.album.price}, ${data.album.cantidadComprada}
+            )
+          `;
+        }
+    }
+  }
+  catch(error){
+    return ("Something went wrong");
+  }
+  finally{
+    if (inserted){
+      revalidatePath('/');
+      redirect('/');
+    }
+  }
 
   }
