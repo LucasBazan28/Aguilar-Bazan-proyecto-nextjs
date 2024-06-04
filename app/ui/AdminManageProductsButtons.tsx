@@ -1,6 +1,7 @@
 "use client";
 import { deleteLastFMAlbum } from "../lib/actions"
 import { Album } from "../lib/definitions"
+import Link from 'next/link';
 
 type ManageProductInCartProps = {
     album: Album;
@@ -13,19 +14,28 @@ function confirmDelete({album}: ManageProductInCartProps) {
         deleteLastFMAlbum(album);
     }
 }
-/*function EditProduct({album}: ManageProductInCartProps) {
-    // Implementar la edición de un producto
-    console.log("Editando producto", album);
-}*/
+
 export default function AdminManageProductsButtons({album}: ManageProductInCartProps){
     return (
         <>
-        <button
-            className="bg-gray-500 text-white px-3 py-1 rounded"
-            onClick={() => EditProduct({album})}
-        >
-            Edit    
-        </button>
+        <Link 
+            href={{
+            pathname: 'manage_products/edit',
+            query: {
+                name: album.name,
+                artist: album.artist,
+                genre: album.genre,
+                price: album.price 
+                }
+            }}passHref
+            >
+            <button
+                className="bg-gray-500 text-white px-3 py-1 rounded"
+            >
+                Edit
+            </button>
+        </Link>
+
         <button
             className="bg-red-500 text-white px-3 py-1 rounded"
             onClick={() => confirmDelete({album})}

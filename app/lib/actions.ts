@@ -90,7 +90,8 @@ export async function authenticate(
   }
   finally{
     if (inserted){
-      //MOSTRAR CARTEL DE EXITO 
+      //MOSTRAR CARTEL DE EXITO
+      window.alert("Album created successfully");
       revalidatePath('/');
       redirect('/');
     }
@@ -105,7 +106,7 @@ export async function authenticate(
       const artist = album.artist
       const albumName = album.name;   
       
-      await sql`DELETE FROM albums WHERE LOWER(name) = LOWER(${albumName})`;
+      await sql`DELETE FROM albums WHERE LOWER(name) = LOWER(${albumName}) AND LOWER(artist) = LOWER(${artist})`;
       deleted = true;
   }
   catch(error){
@@ -114,6 +115,32 @@ export async function authenticate(
   finally{
     if (deleted){
       //MOSTRAR CARTEL DE EXITO
+      window.alert("Album deleted successfully");
+      revalidatePath('/');
+      redirect('/');
+    }
+  }
+
+  }
+  export async function updateLastFMAlbum(
+    album: Album
+  ) {
+  let updated = false;
+  try{
+      const artist = album.artist
+      const albumName = album.name;   
+      
+      await sql`UPDATE albums
+                SET genre = ${album.genre}, price = ${album.price}      
+                WHERE LOWER(name) = LOWER(${albumName}) AND LOWER(artist) = LOWER(${artist})`;
+      updated = true;
+      window.alert("Album updated successfully");
+  }
+  catch(error){
+    return ("Something went wrong");
+  }
+  finally{
+    if (updated){
       revalidatePath('/');
       redirect('/');
     }
