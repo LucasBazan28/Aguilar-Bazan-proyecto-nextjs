@@ -4,6 +4,7 @@ import './header.css';
 import Link from 'next/link';
 import Logo from './logo';
 import { CartIcon } from './cartIcons';
+import { SignInOutButton } from './SignInOutButton';
 
 const Header = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
@@ -37,9 +38,9 @@ const Header = () => {
           <Link href="/cart" passHref>
             <button><CartIcon /></button>
           </Link>
-          <Link href="/prueba" passHref>
-            <button className="log-in-button text-sm lg:text-md">Log In</button>
-          </Link>
+          {/*<SignInOutButton />
+          TIRA ERROR, PROBABLEMENTE POR COMO USO AUTH
+          POSIBLE SOLUCION: USAR bcryptjs en vez de */}
         </div>
       </div>
     </header>

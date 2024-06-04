@@ -9,7 +9,7 @@ type AlbumsClientComponentProps = {
 };
 
 const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAlbums }) => {
-  const [filters, setFilters] = useState<Filters>({ genre: 'all', minPrice: 0, maxPrice: 1000 });
+  const [filters, setFilters] = useState<Filters>({ genre: 'all', minPrice: 0, maxPrice: 200 });
   const [albums, setAlbums] = useState<Album[]>(initialAlbums);
   const [filteredAlbums, setFilteredAlbums] = useState<Album[]>(initialAlbums);
   
@@ -37,6 +37,7 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
   return (
     <>
     <div className="flex flex-wrap">
+      
       <div className="filters-container w-full md:w-1/6 flex flex-col gap-4 p-4">
         <div className="flex flex-col gap-4">
             <label htmlFor="genre" className="text-lg font-medium text-white">Genre</label>
@@ -54,18 +55,20 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
             type="range"
             id="price"
             min="0"
-            max="1000"
+            max="200"
             value={filters.minPrice}
             onChange={handleChangeMinPrice}
           />
           <span>${filters.minPrice}</span>
         </div>
       </div>
+
       <div className = "w-full md:w-5/6 p-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 albums-container">
         {filteredAlbums.map(album => (
           <AlbumCard key={album.name} {...album} />
         ))}
       </div>
+      
     </div>
     </>
   );

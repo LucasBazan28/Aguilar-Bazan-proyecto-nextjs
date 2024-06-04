@@ -5,6 +5,7 @@ import { AuthError } from 'next-auth';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { Album } from './definitions';
 
 export async function logOut(){
   await signOut();
@@ -89,6 +90,30 @@ export async function authenticate(
   }
   finally{
     if (inserted){
+      //MOSTRAR CARTEL DE EXITO 
+      revalidatePath('/');
+      redirect('/');
+    }
+  }
+
+  }
+  export async function deleteLastFMAlbum(
+    album: Album
+  ) {
+  let deleted = false;
+  try{
+      const artist = album.artist
+      const albumName = album.name;   
+      
+      await sql`DELETE FROM albums WHERE LOWER(name) = LOWER(${albumName})`;
+      deleted = true;
+  }
+  catch(error){
+    return ("Something went wrong");
+  }
+  finally{
+    if (deleted){
+      //MOSTRAR CARTEL DE EXITO
       revalidatePath('/');
       redirect('/');
     }

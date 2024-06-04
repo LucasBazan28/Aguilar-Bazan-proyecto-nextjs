@@ -36,14 +36,14 @@ export default function AdminPage() {
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
               htmlFor="albumName"
             >
-              Password
+              Album name
             </label>
             <input
                 className="text-black peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="albumName"
                 type="albumName"
                 name="albumName"
-                placeholder="Enter albumName"
+                placeholder="Enter the album name"
                 required
             />
             <label
