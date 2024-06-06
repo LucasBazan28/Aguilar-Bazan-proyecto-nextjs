@@ -3,7 +3,7 @@ import { updateLastFMAlbum } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Album } from '@/app/lib/definitions';
-
+import {useRef} from 'react';
 type EditAlbumProps = {
     album: Album;
   };
@@ -13,6 +13,7 @@ export default function EditAlbum() {
     const artist = useSearchParams().get('artist');
     const genre = useSearchParams().get('genre');
     const price = useSearchParams().get('price');  
+    const formRef = useRef<HTMLFormElement>(null)
 
     const [album, setAlbum] = useState<Album>({} as Album);
 
@@ -35,17 +36,33 @@ export default function EditAlbum() {
         
     }, [ name, artist, genre, price]);
 
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+        
+        if(formRef.current){
+        const formData = new FormData(formRef.current);
+    
+        // Agregar datos adicionales
+        formData.append('artist', album.artist);
+        formData.append('album', album.name);
+    
+        updateLastFMAlbum(formData)
+      }
+    };
+
     return (
         <div>
             <h1>Edit Album</h1>
-            <form>
+            <form ref={formRef} onSubmit={handleSubmit} >
                 <div className='text-bold'>
                     {album.name} - {album.artist}   
                 </div>
                 <div>
-                    <label>Genre:</label>
+                    <label htmlFor='genre'>Genre:</label>
                     <input 
-                        type="text"
+                        type="genre"
+                        id="genre"
+                        name="genre"
                         className='text-black'
                         value={album.genre} 
                         onChange={(e) => setAlbum({ ...album, genre: e.target.value })} 
@@ -54,15 +71,16 @@ export default function EditAlbum() {
                 <div>
                     <label>Price:</label>
                     <input 
+                        id="price"
                         type="number"
+                        name="price"
+                        inputMode="decimal"
                         className='text-black'
                         value={album.price} 
                         onChange={(e) => setAlbum({ ...album, price: parseFloat(e.target.value) })} 
                     />
                 </div>
-                <button 
-                    type="submit"
-                    onClick={() => updateLastFMAlbum(album)}
+                <button
                     >Save Changes
                 </button>
             </form>

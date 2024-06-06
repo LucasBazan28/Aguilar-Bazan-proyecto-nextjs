@@ -90,8 +90,6 @@ export async function authenticate(
   }
   finally{
     if (inserted){
-      //MOSTRAR CARTEL DE EXITO
-      window.alert("Album created successfully");
       revalidatePath('/');
       redirect('/');
     }
@@ -114,8 +112,6 @@ export async function authenticate(
   }
   finally{
     if (deleted){
-      //MOSTRAR CARTEL DE EXITO
-      window.alert("Album deleted successfully");
       revalidatePath('/');
       redirect('/');
     }
@@ -123,26 +119,36 @@ export async function authenticate(
 
   }
   export async function updateLastFMAlbum(
-    album: Album
+    formData: FormData
   ) {
   let updated = false;
   try{
-      const artist = album.artist
-      const albumName = album.name;   
+      const artist = formData.get("artist") as string;
+      const albumName = formData.get("album") as string; 
+
+      const genre = formData.get('genre') as string ;
+      const priceValue = formData.get('price');
+
+      let price: number | null = null;
+
+      if (typeof priceValue === 'string') {
+          // Solo si priceValue es una cadena, convertir a número
+          price = parseFloat(priceValue);
+      }
+
       
       await sql`UPDATE albums
-                SET genre = ${album.genre}, price = ${album.price}      
+                SET genre = ${genre}, price = ${price}      
                 WHERE LOWER(name) = LOWER(${albumName}) AND LOWER(artist) = LOWER(${artist})`;
       updated = true;
-      window.alert("Album updated successfully");
-  }
-  catch(error){
-    return ("Something went wrong");
-  }
-  finally{
-    if (updated){
-      revalidatePath('/');
-      redirect('/');
+    }
+    catch(error){
+      return ("Something went wrong");
+    }
+    finally{
+      if (updated){
+        revalidatePath('/');
+        redirect('/');
     }
   }
 
