@@ -20,14 +20,10 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
 //Actualiza el parámetro de página al provisto
 //Finalmente construye la URL completa usando el pathName y los parámetros de búsqueda actualizados
 
-  // NOTE: comment in this code when you get to this point in the course
-
   const allPages = generatePagination(currentPage, totalPages);
 
   return (
     <>
-      {/* NOTE: comment in this code when you get to this point in the course */}
-
       <div className="inline-flex">
         <PaginationArrow
           direction="left"

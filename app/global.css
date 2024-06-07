@@ -5,7 +5,7 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 2, 22;
-  --background-end-rgb: 0, 4, 44;
+  --background-end-rgb: 0, 62, 87;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,4 +35,104 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+.submitButton {
+  --color: #00A97F;
+  --color2: rgb(10, 25, 30);
+  padding: 0.4em 1em;
+  background-color: transparent;
+  border-radius: 4px;
+  border: .3px solid var(--color);
+  transition: .5s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  font-weight: 300;
+  font-size: 14px;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  text-transform: uppercase;
+  color: var(--color);
+ }
+ 
+ .submitButton::after, .submitButton::before {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: skew(90deg) translate(-50%, -50%);
+  position: absolute;
+  inset: 50%;
+  left: 25%;
+  z-index: -1;
+  transition: .5s ease-out;
+  background-color: var(--color);
+ }
+ 
+ .submitButton::before {
+  top: -50%;
+  left: -25%;
+  transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+ }
+ 
+ .submitButton:hover::before {
+  transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+ }
+ 
+ .submitButton:hover::after {
+  transform: skew(45deg) translate(-50%, -50%);
+ }
+ 
+ .submitButton:hover {
+  color: var(--color2);
+ }
+ 
+ .submitButton:active {
+  filter: brightness(.7);
+  transform: scale(.98);
+ }
+ .viewProductButton {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding:  0.5em 1.5em;
+  border: 2px solid #00d5e4;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  color: #00d5e4;
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+.viewProductButton:before {
+  transition: 0.5s all ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: '';
+  background-color: #00d5e4;
+  z-index: -1;
+}
+
+.viewProductButton:hover, button:focus {
+  color: white;
+}
+
+.viewProductButton:hover:before, .viewProductButton:focus:before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.viewProductButton:active {
+  transform: scale(0.9);
 }

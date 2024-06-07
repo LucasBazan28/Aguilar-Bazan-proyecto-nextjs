@@ -11,12 +11,12 @@ export default async function AlbumsComponent({ query, currentPage }: { query: s
   return (
     <>
       {albums.length > 0 ? (
-        <>
+        <div className="grid-cols-1 justify-items-center">
           <AlbumsClientComponent initialAlbums={albums} />
-          <div className="mt-4">
+          <div className="mt-4 mx-auto">
             <Pagination totalPages={totalPages} />
           </div>
-        </>
+        </div>
       ) : (
         <p>Sorry, we couldn´t find the album you´re looking for.</p>
       )}

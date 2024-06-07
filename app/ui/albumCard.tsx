@@ -10,7 +10,16 @@ const AlbumCard = (album: Album) => {
   const albumData = encodeURIComponent(JSON.stringify(album));
 
   return (
-    <Card key={album.name} className="py-4">
+    <Card key={album.name}>
+        {album.mediumimage && (       //pequeño chequeo para poner la imagen solamente si no es nula (tene en cuenta que lastfm siempre devuelve listeners, nombre y artista, pero no siempre imagenes)
+          <Image
+            alt={album.name}
+            className="object-contain"
+            src={album.mediumimage}
+            width={200}
+            height={200}
+          />
+        )}
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-small uppercase font-bold">{album.name}</p>
         <small className="text-default-500">Listeners: {album.listeners}</small>
@@ -18,15 +27,6 @@ const AlbumCard = (album: Album) => {
         <h4 className="text-tiny">${album.price}</h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
-        {album.mediumimage && (       //pequeño chequeo para poner la imagen solamente si no es nula (tene en cuenta que lastfm siempre devuelve listeners, nombre y artista, pero no siempre imagenes)
-          <Image
-            alt={album.name}
-            className="object-cover rounded-xl"
-            src={album.mediumimage}
-            width={50}
-            height={50}
-          />
-        )}
         <div className="mt-2">
           <Link 
             href={{
@@ -34,7 +34,7 @@ const AlbumCard = (album: Album) => {
               query: { album: albumData }
             }}
           >
-            <button className="btn btn-primary">VER PRODUCTO</button>
+            <button className="btn viewProductButton">VER PRODUCTO</button>
           </Link>
         </div>
       </CardBody>

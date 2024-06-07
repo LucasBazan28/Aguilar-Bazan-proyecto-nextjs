@@ -34,11 +34,12 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
     }));
   };
 
+if(filteredAlbums.length > 0){
   return (
     <>
     <div className="flex flex-wrap">
       
-      <div className="filters-container w-full md:w-1/6 flex flex-col gap-4 p-4">
+      <div className="w-full md:w-1/6 flex flex-col gap-4 p-4">
         <div className="flex flex-col gap-4">
             <label htmlFor="genre" className="text-lg font-medium text-white">Genre</label>
             <select className="text-black" id="genre" value={filters.genre} onChange={handleGenreChange}>
@@ -72,6 +73,37 @@ const AlbumsClientComponent: React.FC<AlbumsClientComponentProps> = ({ initialAl
     </div>
     </>
   );
+}else{
+  return(
+    <>
+    <p>Sorry, we couldn´t find the album you´re looking for.</p>
+    <div className="w-full">
+          <div className="flex flex-col gap-4">
+              <label htmlFor="genre" className="text-lg font-medium text-white">Genre</label>
+              <select className="text-black" id="genre" value={filters.genre} onChange={handleGenreChange}>
+                <option value="all">Todos</option>
+                <option value="rock">Rock</option>
+                <option value="metal">Metal</option>
+                <option value="pop">Pop</option>
+              </select>
+          </div>
+      
+          <div className="flex flex-col gap-4">
+            <label htmlFor="price" className="text-lg font-medium">Minimum Price</label>
+            <input
+              type="range"
+              id="price"
+              min="0"
+              max="200"
+              value={filters.minPrice}
+              onChange={handleChangeMinPrice}
+            />
+            <span>${filters.minPrice}</span>
+          </div>
+        </div>
+    </>
+  )
+}
 };
 
 export default AlbumsClientComponent;
