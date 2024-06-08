@@ -6,6 +6,7 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Album } from './definitions';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function logOut(){
   await signOut();
@@ -153,3 +154,56 @@ export async function authenticate(
   }
 
   }
+  const mercadopago = require('mercadopago');
+  mercadopago.configure({
+    access_token: 'TU_ACCESS_TOKEN_PROD', // Reemplaza 'TU_ACCESS_TOKEN_PROD' con tu token de acceso privado
+  });
+  export default async function paymentHandler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method === 'POST') {
+      const paymentData = {
+        transaction_amount: Number(req.body.transaction_amount),
+        token: req.body.token,
+        description: req.body.description,
+        installments: Number(req.body.installments),
+        payment_method_id: req.body.payment_method_id,
+        payer: {
+          email: req.body.payer.email,
+          identification: {
+            type: req.body.payer.identification.type,
+            number: req.body.payer.identification.number,
+          },
+        },
+      };
+  
+      try {
+        const response = await mercadopago.payment.save(paymentData);
+        res.status(201).json(response);
+      } catch (error) {
+        res.status(500).json(error);
+      }
+    } else {
+      res.status(405).json({ message: 'Method not allowed' });
+    }
+  }
+  // Crear un objeto de preferencia
+let preference = {
+  // el "purpose": "wallet_purchase" solo permite pagos registrados
+  // para permitir pagos de guests puede omitir esta propiedad
+  "purpose": "wallet_purchase",
+  "items": [
+    {
+      "id": "item-ID-1234",
+      "title": "Meu produto",
+      "quantity": 1,
+      "unit_price": 75.76
+    }
+  ]
+};
+
+mercadopago.preferences.create(preference)
+  .then(function (response) {
+    // Este valor es el ID de preferencia que se enviará al ladrillo al inicio
+    const preferenceId = response.body.id;
+  }).catch(function (error) {
+    console.log(error);
+  });

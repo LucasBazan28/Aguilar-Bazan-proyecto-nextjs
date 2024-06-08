@@ -18,6 +18,6 @@ const config: Config = {
       }
     },
   },
-  plugins: [require('daisyui'), nextui()],
+  plugins: [nextui()],
 };
 export default config;
