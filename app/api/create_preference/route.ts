@@ -20,7 +20,13 @@ export async function POST(request: NextRequest) {
           title: item.name,
           quantity: item.quantity,
           unit_price: Number(item.price) ,
-        }))
+        })),
+        back_urls: {
+          success: "http://facebook.com", //MODIFICAR, SOLO FUNCIONAN CON LINKS VERDADEROS
+          failure: "http://localhost:3000/failure",
+          pending: "http://localhost:3000/pending"
+        },
+        auto_return: "approved",
       }
     });
 
