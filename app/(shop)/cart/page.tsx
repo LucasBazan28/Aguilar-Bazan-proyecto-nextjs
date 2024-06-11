@@ -2,10 +2,32 @@
 import { useCart } from '@/app/hooks/useCart';
 import { AlbumInCart } from '@/app/lib/definitions';
 import { ClearCartIcon } from '@/app/ui/cartIcons';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { useEffect, useState } from "react"
 
 export default function CartPage() {
   const { cart, addOneToCart, removeOneFromCart, removeFromCart, clearCart } = useCart();
+  const [preferenceId, setPreferenceId] = useState<string | null>(null);
 
+  useEffect(() => {
+    initMercadoPago('TEST-4073b790-86dd-40c2-b12d-5dc16f3c774a', { locale: 'es-AR' }); //PUBLIC KEY
+  }, [])
+
+  const handleClick = async () => {
+    try {
+      const response = await fetch('/api/create_preference', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: cart }),
+      });
+      const data = await response.json();
+      setPreferenceId(data.preferenceId);
+    } catch (error) {
+      console.error('Error creating preference:', error);
+    }
+  };
   return (
     <div className="min-h-screen container mx-auto p-4 mt-custom">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
@@ -46,6 +68,8 @@ export default function CartPage() {
           >
             <ClearCartIcon/>
           </button>
+          <button onClick={handleClick} >Procesar pago</button>
+          {preferenceId && <Wallet initialization={{ preferenceId }} />}  
         </div>
       )}
     </div>

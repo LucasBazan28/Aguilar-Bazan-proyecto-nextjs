@@ -153,3 +153,123 @@ export async function authenticate(
   }
 
   }
+
+  /*//Crear preferencia
+  import { MercadoPagoConfig, Preference } from 'mercadopago'; // SDK de Mercado Pago
+  const client = new MercadoPagoConfig({ accessToken: 'TEST-5234027709903520-061010-315c94f4b8143d62476e38f884bf751b-139194673' });
+  
+  export async function createPreference(
+    formData: FormData
+    //Debería ser un array de albumes en vez de uno solo
+    ) {
+      
+      const artist = formData.get("artist") as string;
+      const albumName = formData.get("album") as string; 
+      const genre = formData.get('genre') as string ;
+      const priceValue = formData.get('price');
+      
+      const preference = new Preference(client);
+        //VER TEMA REQ RES
+    const result =  preference.create({
+        body: {
+          items: [
+            {
+              title: artist + " - " + albumName,
+              quantity: 1,
+              unit_price: 2000,
+              id: ''
+            }
+          ],
+          back_urls: {
+            success: "http://localhost:3000/successPrueba", //MODIFICARRRR
+            failure: "http://localhost:3000/failure",
+            pending: "http://localhost:3000/pending"
+          },
+        }
+      })
+    .then(console.log)
+    .catch(console.log);
+  } */
+
+
+
+  //_________________ BUENO  
+  /*import type { NextApiRequest, NextApiResponse } from 'next';
+  import { MercadoPagoConfig, Preference } from 'mercadopago';
+  const client = new MercadoPagoConfig({ accessToken: 'TEST-5234027709903520-061010-315c94f4b8143d62476e38f884bf751b-139194673' });
+  
+  export default async function createPreference(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
+        return res.status(405).end(`Method ${req.method} Not Allowed`);
+    }
+
+    try {
+        /*const { title, price, quantity } = req.body;
+
+        if (!title || !price || !quantity) {
+            return res.status(400).json({ error: "Faltan datos requeridos" });
+        }*/
+
+      /* const preference = new Preference(client);
+       const result =  preference.create({
+        body: {
+          items: [
+            {
+              title: req.body.title,
+              quantity: req.body.quantity,
+              unit_price: req.body.price,
+              id: ''
+            }
+          ],
+          back_urls: {
+            success: "http://localhost:3000/successPrueba", //MODIFICARRRR
+            failure: "http://localhost:3000/failure",
+            pending: "http://localhost:3000/pending"
+          },
+        }
+      })
+    
+        //const result = await preference.create({body});
+
+        res.status(200).json({ id: result.body.id });
+    } catch (error) {
+        console.error("Error al crear la preferencia", error);
+        res.status(500).json({ error: "Error al crear la preferencia" });
+    }
+}*/
+
+
+//NO PUEDE PASAR A SERVER ACTION, DEBE SER DE API
+
+/*import { MercadoPagoConfig, Preference } from 'mercadopago';
+import { NextRequest, NextResponse } from 'next/server';
+
+const client = new MercadoPagoConfig({ accessToken: "TEST-5113519851838077-060615-2bbfd7b8a6495ed0b67f8f618bb0f4a3-272885138" });
+
+export async function POST(request: NextRequest) {
+  try {
+    const { items } = await request.json();
+    if (!items || items.length === 0) {
+      return NextResponse.json({ message: 'No items provided' }, { status: 400 });
+    }
+
+    const preference = new Preference(client);
+
+    const response = await preference.create({
+      body: {
+        external_reference: '123',
+        items: items.map((item: { name: string; quantity: number; price: number }) => ({
+          title: item.name,
+          quantity: item.quantity,
+          unit_price: Number(item.price) ,
+        }))
+      }
+    });
+
+    return NextResponse.json({ preferenceId: response.id, items });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+  }
+} */
