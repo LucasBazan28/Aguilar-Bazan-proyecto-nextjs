@@ -31,14 +31,14 @@ export async function POST(request: NextRequest) {
       }
     });
     console.log(items);
+    console.log(response.id)
     for (const item of items) {
     await sql`
-        INSERT INTO sales (price, quantity, subtotal, transactionDate, id)
+        INSERT INTO sales (price, quantity, subtotal, transaction_date)
         VALUES (${item.price},
                 ${item.quantity},
                 ${item.price * item.quantity},  
-                CURRENT_DATE,
-                ${response.id}
+                CURRENT_DATE
                 )
 
     `;}

@@ -1,7 +1,8 @@
 import "server-only"
 import { sql } from '@vercel/postgres';
 import {
-  Album
+  Album,
+  Sale
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -16,6 +17,22 @@ export async function fetchAllAlbums() {
     } catch (error) {
       console.error('Database Error:', error);
       throw new Error('Failed to fetch the albums.');
+    }
+  }
+
+  export async function fetchAllSales() {
+    try {
+      // Realizar la consulta SQL para seleccionar todas las ventas
+      const result = await sql<Sale>`
+        SELECT * FROM sales;
+      `;
+  
+      // Devolver el resultado de la consulta
+      return result.rows;
+    } catch (error) {
+      // Manejar cualquier error de consulta o conexión
+      console.error('Error fetching sales:', error);
+      throw error; // Opcional: propagar el error para manejarlo en un nivel superior
     }
   }
 
