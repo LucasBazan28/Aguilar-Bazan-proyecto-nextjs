@@ -1,3 +1,4 @@
+import { sql } from '@vercel/postgres';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -29,7 +30,18 @@ export async function POST(request: NextRequest) {
         auto_return: "approved",
       }
     });
+    console.log(items);
+    for (const item of items) {
+    await sql`
+        INSERT INTO sales (price, quantity, subtotal, transactionDate, id)
+        VALUES (${item.price},
+                ${item.quantity},
+                ${item.price * item.quantity},  
+                CURRENT_DATE,
+                ${response.id}
+                )
 
+    `;}
     return NextResponse.json({ preferenceId: response.id, items });
   } catch (error) {
     console.error(error);

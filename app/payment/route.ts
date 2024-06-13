@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     console.log(items);
     for (const item of items) {
     await sql`
-        INSERT INTO sales (price, quantity, subtotal, date, transaction_mp_id, person_email)
+        INSERT INTO ventas (price, quantity, subtotal, date, transaction_mp_id, person_email)
         VALUES (${item.price}, ${item.quantity}, ${item.price * item.quantity},CURRENT_DATE,${sale.transaction_mp_id}, ${sale.person_email})
         RETURNING s_id;
 
