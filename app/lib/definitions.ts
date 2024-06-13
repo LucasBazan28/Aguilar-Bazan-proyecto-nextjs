@@ -35,6 +35,11 @@ export type CartContextType = {
   clearCart: () => void;
 }
 
+export type AlbumContextType = {
+  album: Album | null;
+  setAlbum: (album: Album) => void;
+}
+
 export type Filters = {
   genre: string,
   minPrice: number,

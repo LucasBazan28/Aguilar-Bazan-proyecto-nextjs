@@ -1,25 +1,14 @@
 "use client";
-import { useEffect, useState } from 'react';
-import {Album} from "@/app/lib/definitions"
 import Image from 'next/image';
 import { Inter } from 'next/font/google'
 import { ManageProductInCart } from '@/app/ui/manageProductInCart';
+import { useAlbum} from '@/app/hooks/useAlbum';
  
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
 
 export default function ProductPage() {
-  const [album, setAlbum] = useState<Album | null>(null);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const albumData = queryParams.get('album');
-
-    if (albumData) {
-      const parsedAlbum = JSON.parse(decodeURIComponent(albumData));
-      setAlbum(parsedAlbum);
-    }
-  }, []);
+  const { album } = useAlbum();
 
   const summary = album?.summary?.replace(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>.*?<\/a>/gi, '') ?? '';
 

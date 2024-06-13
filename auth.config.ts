@@ -31,14 +31,14 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnLogin = nextUrl.pathname.startsWith('/login');
-      if (isOnLogin) {
-        if (isLoggedIn) {
-          return true;
+      const isOnAdmin = nextUrl.pathname.startsWith('/admin');
+      if (isOnAdmin) {
+        if (!isLoggedIn) {
+          return false;
         }
         return true; // Allow access to the login page
       } else if (!isLoggedIn) {
-        return false;
+        return true;
       }
     
       return true;
