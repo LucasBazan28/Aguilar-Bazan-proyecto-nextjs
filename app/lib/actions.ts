@@ -9,7 +9,16 @@ import { Album } from './definitions';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export async function logOut(){
-  await signOut();
+  try{
+    await signOut();
+  }
+  catch(error){
+    if ((error as Error).message === 'NEXT_REDIRECT')  {
+      console.log("redireccion a home")
+      redirect("/login")
+    }
+    else throw error
+  }
 }
 
 export async function authenticate(
