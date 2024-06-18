@@ -22,7 +22,7 @@ export default async function Home({
     <HomeCarousel/>
     <Search placeholder="Search Albums"/>
 
-    <div className="flex flex-col md:flex-row">
+    <div className="flex-col md:flex-row">
       <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
         <AlbumsComponent query={query} currentPage={currentPage} />
       </Suspense>      
