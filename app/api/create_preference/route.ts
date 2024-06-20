@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
           unit_price: Number(item.price) ,
         })),
         back_urls: {
-          success: "http://facebook.com", //MODIFICAR, SOLO FUNCIONAN CON LINKS VERDADEROS
-          failure: "http://localhost:3000/failure",
-          pending: "http://localhost:3000/pending"
+          success: "https://aguilar-bazan-proyecto-nextjs.vercel.app",
+          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
+          pending: "https://aguilar-bazan-proyecto-nextjs.vercel.app"
         },
         auto_return: "approved",
       }
