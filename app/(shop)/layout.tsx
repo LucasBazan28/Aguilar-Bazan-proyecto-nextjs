@@ -23,7 +23,7 @@ export default function Layout({
           <Header />
           <AlbumProvider>
             <CartProvider>
-              <div className="flex flex-col overflow-y-auto">
+              <div className="flex flex-col overflow-y-auto min-h-screen">
                 {children}
               </div>
             </CartProvider>

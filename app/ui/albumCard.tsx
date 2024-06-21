@@ -15,11 +15,11 @@ const AlbumCard = (album: Album) => {
 
   return (
     <Card key={album.name} className="w-full">
-        {album.largeimage && (       //pequeño chequeo para poner la imagen solamente si no es nula (tene en cuenta que lastfm siempre devuelve listeners, nombre y artista, pero no siempre imagenes)
+        {album.megaimage && (       //pequeño chequeo para poner la imagen solamente si no es nula (tene en cuenta que lastfm siempre devuelve listeners, nombre y artista, pero no siempre imagenes)
           <Image
             alt={album.name}
             className="object-contain w-full"
-            src={album.largeimage}
+            src={album.megaimage}
             width={200}
             height={200}
           />

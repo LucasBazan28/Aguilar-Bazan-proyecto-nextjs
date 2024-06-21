@@ -13,7 +13,7 @@ export default async function AlbumsComponent({ query, currentPage }: { query: s
       {albums.length > 0 ? (
         <div className="grid-cols-1 justify-items-center">
           <AlbumsClientComponent initialAlbums={albums} />
-          <div className="mt-4 mx-auto">
+          <div className="mt-4 flex items-center justify-center">
             <Pagination totalPages={totalPages} />
           </div>
         </div>

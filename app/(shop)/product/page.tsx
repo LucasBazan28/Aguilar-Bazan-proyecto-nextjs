@@ -16,9 +16,11 @@ export default function ProductPage() {
   const { album } = useAlbum();
   const [generalAlbum, setAlbum] = useState<Album | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchAlbum = async () => {
+      setLoading(true); // Activar el estado de carga al iniciar la solicitud
       try {
           const queryParams = new URLSearchParams(window.location.search);
           const name = queryParams.get('name');
@@ -33,6 +35,9 @@ export default function ProductPage() {
           }
       } catch (error) {
         console.error('Error fetching album details:', error);
+      }
+      finally{
+        setLoading(false);
       }
     };
 
@@ -70,6 +75,12 @@ export default function ProductPage() {
     <div>
 
     <div className="flex min-h-screen min-w-screen">
+      {loading ? (
+        <div>
+          <div className="mt-custom"></div>
+          <p className="text-center text-xl ml-6 mt-6">Loading...</p>
+        </div>
+      ) : (
         <div className="ml-8 w-full h-full flex-col p-4 mr-8">
           {generalAlbum && (
             <>
@@ -124,7 +135,8 @@ export default function ProductPage() {
           )}
           
         </div>
-      </div>
+        )}
+         </div>
       
     </div>
   );

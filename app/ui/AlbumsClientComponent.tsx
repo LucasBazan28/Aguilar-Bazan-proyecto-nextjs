@@ -77,7 +77,7 @@ if(filteredAlbums.length > 0){
   return(
     <>
     <p>Sorry, we couldn´t find the album you´re looking for.</p>
-    <div className="w-full">
+    <div className="w-full md:w-1/6 flex flex-col gap-4 p-4">
           <div className="flex flex-col gap-4">
               <label htmlFor="genre" className="text-lg font-medium text-white">Genre</label>
               <select className="text-black" id="genre" value={filters.genre} onChange={handleGenreChange}>
