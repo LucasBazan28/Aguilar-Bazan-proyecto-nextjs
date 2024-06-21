@@ -155,3 +155,17 @@ export async function fetchAlbumByName(name: string){
     throw new Error('Failed to fetch the album.');
   }
 }
+
+export async function fetchArtist(name: string){
+  try {
+    const artistQuery = await sql<Album>`
+      SELECT * FROM artists
+      WHERE LOWER(name) = LOWER(${name})
+      LIMIT 1
+    `;
+    return artistQuery.rows[0] || null;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the album.');
+  }
+}

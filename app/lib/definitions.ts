@@ -53,3 +53,8 @@ export type Filters = {
   minPrice: number,
   maxPrice: number
 }
+
+export type Artist = {
+  name: string, 
+  summary: string
+}

@@ -104,8 +104,51 @@ export async function authenticate(
       redirect('/');
     }
   }
+}
 
+  export async function getArtistInfo(
+    formData: FormData
+  ){
+    let inserted = false;
+    const artist = formData.get('artist') as string;
+
+  try {
+    const apiKey = '7bdea081f9cfb2778ce14d92ef7cc2ed';
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.error) {
+      return data.message; // Si hay un error, devuelve el mensaje de error
+    }  else if (!data.artist.bio || !data.artist.bio.summary) {
+      return 'El artista no tiene un resumen disponible'; // Si no hay resumen disponible para el artista
+    } else {
+      const result = await sql`SELECT * FROM artists WHERE LOWER(name) = LOWER(${data.artist.name})`;
+
+      inserted = true;
+      if (result.rows.length == 0) {
+
+        // Insertar en la tabla de artistas
+        await sql`
+          INSERT INTO artists (name, summary)
+          VALUES (${data.artist.name}, ${data.artist.bio.summary})
+        `;
+      }
+    }
+  } catch (error) {
+    console.error('Error al crear artista:', error);
+    return 'Ocurrió un error al crear el artista';
+  } finally {
+    if (inserted) {
+      const artistNameQueryParam = encodeURIComponent(artist);
+      revalidatePath(`/product/artist?name=${artistNameQueryParam}`);
+      redirect(`/product/artist?name=${artistNameQueryParam}`);
+    }
   }
+  }
+
+  
   export async function deleteLastFMAlbum(
     album: Album
   ) {
