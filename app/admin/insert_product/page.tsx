@@ -11,7 +11,8 @@ export default function AdminPage() {
   const { pending } = useFormStatus();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div>
+    <div className="min-h-screen flex flex-col items-center justify-center mt-8">
       <div className="md:w-1/3 p-8 bg-white rounded-lg shadow-md mx-14">
         <h1 className="text-2xl font-bold text-black mb-6">Buscar Información del Álbum en Last.fm</h1>
         <form action={dispatch} className="space-y-4">
@@ -112,11 +113,12 @@ export default function AdminPage() {
           </div>
         </form>
       </div>
-      <form action={logOut}>
-                  <button className="mt-4 mr-8 ml-4 flex h-[60px] w-full items-center justify-center gap-2 rounded-md bg-black p-4 text-lg font-medium text-white hover:bg-gray-200 hover:text-black md:w-auto md:justify-start">
+    </div>
+    <form action={logOut}>
+                  <button className="mt-4 mb-4 ml-4 flex h-[60px] w-full items-center justify-center gap-2 rounded-md bg-black p-4 text-lg font-medium text-white hover:bg-gray-200 hover:text-black md:w-auto md:justify-start">
                     <div className="block">Sign Out</div>
                   </button>
-        </form>
+      </form>
     </div>
   );
 }

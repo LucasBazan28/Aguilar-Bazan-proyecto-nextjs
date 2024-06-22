@@ -21,6 +21,7 @@ export async function fetchAllAlbums() {
   }
 
   export async function fetchAllSales() {
+    noStore();
     try {
       // Realizar la consulta SQL para seleccionar todas las ventas
       const result = await sql<Sale>`
