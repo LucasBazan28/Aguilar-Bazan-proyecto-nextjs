@@ -50,7 +50,7 @@ export default function ProductPage() {
       const albumSummary = album.summary?.replace(/<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1[^>]*>.*?<\/a>/gi, '') ?? null;
       setSummary(albumSummary);
     }
-  }, []);
+  }, [album]);
   
 
   let errorMessage;

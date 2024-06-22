@@ -35,12 +35,15 @@ const Header = () => {
       <div className="container mx-auto">
         <Logo />
         <div className="flex space-x-4">
-          <Link href="/cart" passHref>
+          <Link href="/admin">
+            <button>Admin</button>
+          </Link>
+          <Link href="/login">
+            <button>Login</button>
+          </Link>
+          <Link href="/cart">
             <button><CartIcon /></button>
           </Link>
-          {/*<SignInOutButton />
-          TIRA ERROR, PROBABLEMENTE POR COMO USO AUTH
-          POSIBLE SOLUCION: USAR bcryptjs en vez de */}
         </div>
       </div>
     </header>

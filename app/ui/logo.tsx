@@ -3,8 +3,8 @@ import Image from "next/image";
 import './header.css';
 const Logo = () => {
   return (
-    <div className="logo w-full h-full">
-        <div className="logo-image">
+    <div className="flex flex-start items-center w-32 h-20">
+        <div className="w-full h-full relative">
             <Image
             src="/images/Timeless_Sounds_Logo.png"
             alt="Timeless Sounds Logo"
@@ -13,7 +13,7 @@ const Logo = () => {
             style={{ objectFit: 'contain' }} // Mantiene el aspecto original de la imagen
             priority={true}   //cuando la imagen se usa en el header hay que agregar priority
             />
-      </div>
+        </div>
   </div>
   );
 };

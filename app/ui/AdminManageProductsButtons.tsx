@@ -20,14 +20,14 @@ export default function AdminManageProductsButtons({album}: ManageProductInCartP
         <>
         <Link 
             href={{
-            pathname: 'manage_products/edit',
+            pathname: 'admin/edit',
             query: {
                 name: album.name,
                 artist: album.artist,
                 genre: album.genre,
                 price: album.price 
                 }
-            }}passHref
+            }}
             >
             <button
                 className="bg-gray-500 text-white px-3 py-1 rounded"

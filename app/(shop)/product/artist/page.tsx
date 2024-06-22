@@ -1,11 +1,9 @@
 "use client"
 import { Artist } from '@/app/lib/definitions';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 export default function ArtistPage() {
-  const searchParams = useSearchParams();
-  const name  = searchParams.get("name"); // Obtener el nombre del artista desde los parámetros de la URL
   const [artist, setArtist] = useState<Artist | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -14,7 +12,14 @@ export default function ArtistPage() {
     const fetchArtistDetails = async () => {
       setLoading(true); // Activar el estado de carga al iniciar la solicitud
       try {
-        const response = await fetch(`/api/artists?name=${name as string}`);
+        const queryParams = new URLSearchParams(window.location.search);
+        const name = queryParams.get('name');
+       
+        if (!name) {
+          throw new Error('Missing artist name in URL');
+        }
+
+        const response = await fetch(`/api/artists?name=${name}`);
         if (response.ok) {
           const artistData = await response.json();
           setArtist(artistData);
@@ -25,15 +30,13 @@ export default function ArtistPage() {
         }
       } catch (error) {
         console.error('Error fetching artist details:', error);
-      }finally {
+      } finally {
         setLoading(false); // Desactivar el estado de carga al finalizar la solicitud
       }
     };
 
-    if (name) {
-      fetchArtistDetails();
-    }
-  }, [name]);
+    fetchArtistDetails();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen min-w-screen bg-gray-600 text-white p-8">
@@ -59,4 +62,5 @@ export default function ArtistPage() {
       )}
     </div>
   );
-};
+}
+
