@@ -1,5 +1,5 @@
 "use client";
-import { updateLastFMAlbum } from '@/app/lib/actions';
+import { logOut, updateLastFMAlbum } from '@/app/lib/actions';
 import { useEffect, useState } from 'react';
 import {useRef} from 'react';
 
@@ -37,7 +37,7 @@ export default function EditAlbum() {
     };
 
     return (
-        <div className='flex items-center justify-center min-h-screen'>
+        <div className='flex flex-col items-center justify-center min-h-screen'>
             <div className="p-6 items-center relative border border-white rounded-lg bg-white mx-auto flex w-1/2 md:w-2/5 flex-col sm:-mt-20 shadow-md" >
                 <h1 className="relative flex w-full text-2xl text-black font-bold mb-4">Edit Album</h1>
                 <form ref={formRef} onSubmit={handleSubmit} >
@@ -74,6 +74,11 @@ export default function EditAlbum() {
                     </div>
                 </form>
             </div>
+            <form action={logOut}>
+                  <button className="mt-4 mr-8 ml-4 flex h-[60px] w-full items-center justify-center gap-2 rounded-md bg-black p-4 text-lg font-medium text-white hover:bg-gray-200 hover:text-black md:w-auto md:justify-start">
+                    <div className="block">Sign Out</div>
+                  </button>
+            </form>
         </div>
     );
 }

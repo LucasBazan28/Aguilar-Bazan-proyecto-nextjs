@@ -18,7 +18,9 @@ export default function Layout({
           <Header />
             <div className="flex flex-col overflow-y-auto min-h-screen">
                 {children}
+
             </div>
+          
           
         </>
     
