@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
           unit_price: Number(item.price) ,
         })),
         back_urls: {
-          success: "https://aguilar-bazan-proyecto-nextjs.vercel.app",
-          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
+          success: "http://localhost:3000",
+          failure: "http://localhost:3000/api/failure-payment", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
           pending: "https://aguilar-bazan-proyecto-nextjs.vercel.app"
         },
         auto_return: "approved",
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
                 )
 
     `;}
-    return NextResponse.json({ preferenceId: response.id, items });
+    return NextResponse.json({ preferenceId: response.id });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });

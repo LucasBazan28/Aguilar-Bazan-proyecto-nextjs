@@ -28,6 +28,7 @@ export default function CartPage() {
       console.error('Error creating preference:', error);
     }
   };
+
   return (
     <div className="mt-custom">
       {cart.length > 0 && (
@@ -67,29 +68,31 @@ export default function CartPage() {
                 </div>
               ))}
             </div>
-            <div className="relative drop-shadow-xl w-full md:w-48 h-64 overflow-hidden rounded-xl bg-[#3d3c3d] mt-4 md:mt-0">
-              <div className="absolute inset-0.5 flex flex-col items-center justify-center text-white z-[1] opacity-90 rounded-xl bg-[#323132]">
-                <div className="mb-4">
-                  <button className="payButton rounded" onClick={handleClick}>
-                    Procesar pago
-                  </button>
-                  {preferenceId && <Wallet initialization={{ preferenceId }} />}
-                </div>
-                <div>
-                  <button
-                    className="bg-red-700 text-white px-4 py-2 rounded mt-4"
-                    onClick={clearCart}
-                  >
-                    <ClearCartIcon />
-                  </button>
-                </div>
+            <div className="relative drop-shadow-xl w-full md:w-80 h-full overflow-hidden rounded-xl bg-[#3d3c3d] mt-4 md:mt-0 p-4 border-1 border-white">
+              <div className="flex flex-col items-center justify-center text-white">
+                <button 
+                  className="w-full bg-black text-white px-4 py-2 rounded mb-4" 
+                  onClick={handleClick}
+                >
+                  Procesar pago
+                </button>
+                {preferenceId && (
+                  <div className="w-full mb-4">
+                    <Wallet initialization={{ preferenceId }} />
+                  </div>
+                )}
+                <button
+                  className="w-full bg-red-700 text-white px-4 py-2 rounded flex items-center justify-center"
+                  onClick={clearCart}
+                >
+                  <ClearCartIcon />
+                  <span className="ml-2">Clear Cart</span>
+                </button>
               </div>
-              <div className="absolute w-56 h-48 bg-white blur-[50px] -left-1/2 -top-1/2"></div>
             </div>
           </div>
         )}
       </div>
     </div>
   );
-  
-  }
+}
