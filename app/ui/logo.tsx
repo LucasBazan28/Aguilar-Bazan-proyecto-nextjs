@@ -3,7 +3,7 @@ import Image from "next/image";
 import './header.css';
 const Logo = () => {
   return (
-    <div className="flex flex-start items-center w-32 h-20">
+    <div className="flex flex-start items-center w-32 h-16">
         <div className="w-full h-full relative">
             <Image
             src="/images/Timeless_Sounds_Logo.png"

@@ -91,18 +91,20 @@ export default function ProductPage() {
                   <li>Genre: {generalAlbum.genre}</li>
                 </ul>
                 
-                {generalAlbum.extralargeimage &&
-                (<div className="flex justify-center sm:w-full sm:h-full md:w-1/2 md:h-1/2 lg:w-1/3 lg:h-1/3">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={generalAlbum.extralargeimage}
-                      className="object-cover rounded-xl h-full w-full"
-                      alt={generalAlbum.name}
-                      width={300}
-                      height={300} 
-                    />
+                {generalAlbum.extralargeimage && (
+                  <div className="w-full max-w-md">
+                    <div className="relative w-full aspect-square">
+                      <Image
+                        src={generalAlbum.extralargeimage}
+                        alt={generalAlbum.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover rounded-xl"
+                        priority
+                      />
+                    </div>
                   </div>
-                </div>)}
+                )}
                 
                 {summary && (
                   <div className={`${inter.className} text-white mt-8 prose`}>

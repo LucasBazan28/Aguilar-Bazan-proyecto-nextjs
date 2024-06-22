@@ -39,12 +39,14 @@ export default function CartPage() {
           <p className="text-lg">Your cart is empty</p>
         ) : (
           <div className="flex flex-col md:flex-row md:space-x-4">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 md:max-h-[calc(100vh-200px)] md:overflow-y-auto">
               {cart.map((album: AlbumInCart) => (
-                <div key={album.name} className="mb-4 p-4 border rounded-lg shadow-md bg-[#3d3c3d]">
-                  <h2 className="text-xl font-semibold text-white">{album.name}</h2>
-                  <p className="text-white">Artist: {album.artist}</p>
-                  <p className="text-white">Quantity: {album.quantity}</p>
+                <div key={album.name} className="mb-4 p-4 border rounded-lg shadow-md bg-[#3d3c3d] h-[170px] flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-xl font-semibold text-white">{album.name}</h2>
+                    <p className="text-white">Artist: {album.artist}</p>
+                    <p className="text-white">Quantity: {album.quantity}</p>
+                  </div>
                   <div className="flex space-x-2 mt-2">
                     <button
                       className="bg-green-500 text-white px-3 py-1 rounded"
@@ -68,10 +70,10 @@ export default function CartPage() {
                 </div>
               ))}
             </div>
-            <div className="relative drop-shadow-xl w-full md:w-80 h-full overflow-hidden rounded-xl bg-[#3d3c3d] mt-4 md:mt-0 p-4 border-1 border-white">
+            <div className="sticky top-4 w-full md:w-80 h-fit overflow-hidden rounded-xl bg-[#3d3c3d] mt-4 md:mt-0 p-4 border-1 border-white">
               <div className="flex flex-col items-center justify-center text-white">
-                <button 
-                  className="w-full bg-black text-white px-4 py-2 rounded mb-4" 
+                <button
+                  className="w-full bg-black text-white px-4 py-2 rounded mb-4"
                   onClick={handleClick}
                 >
                   Procesar pago
