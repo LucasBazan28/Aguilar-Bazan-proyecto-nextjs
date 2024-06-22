@@ -40,12 +40,12 @@ export type AlbumContextType = {
   setAlbum: (album: Album) => void;
 }
 
-export type Sale = {
-  id: number;        
+export type Sale = {      
   price: number;     
   quantity: number;  
   subtotal: number;  
   transaction_date: Date;  
+  id: number
 }
 
 export type Filters = {

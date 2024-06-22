@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
           unit_price: Number(item.price) ,
         })),
         back_urls: {
-          success: "http://localhost:3000",
-          failure: "http://localhost:3000/api/failure-payment", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
+          success: "https://aguilar-bazan-proyecto-nextjs.vercel.app",
+          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app/api/failure-payment", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
           pending: "https://aguilar-bazan-proyecto-nextjs.vercel.app"
         },
         auto_return: "approved",
@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
     console.log(response.id)
     for (const item of items) {
     await sql`
-        INSERT INTO sales (price, quantity, subtotal, transaction_date)
-        VALUES (${item.price},
+        INSERT INTO sales (preference_id, price, quantity, subtotal, transaction_date)
+        VALUES (${response.id}, ${item.price},
                 ${item.quantity},
                 ${item.price * item.quantity},  
                 CURRENT_DATE
