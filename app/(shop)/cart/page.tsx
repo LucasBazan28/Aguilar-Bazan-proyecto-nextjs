@@ -10,7 +10,7 @@ export default function CartPage() {
   const [preferenceId, setPreferenceId] = useState<string | null>(null);
 
   useEffect(() => {
-    initMercadoPago('TEST-4073b790-86dd-40c2-b12d-5dc16f3c774a', { locale: 'es-AR' }); //PUBLIC KEY
+    initMercadoPago('APP_USR-172e031e-80ad-47eb-91d2-c03212e5e63b', { locale: 'es-AR' }); //PUBLIC KEY
   }, [])
 
   const handleClick = async () => {
