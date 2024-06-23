@@ -24,6 +24,11 @@ export default function ProductPage() {
       try {
           const queryParams = new URLSearchParams(window.location.search);
           const name = queryParams.get('name');
+
+          if (!name) {
+            throw new Error('Missing product name in URL');
+          }
+
           const response = await fetch(`/api/album?name=${name as string}`);
           if (response.ok) {
             const albumData = await response.json();
@@ -81,7 +86,7 @@ export default function ProductPage() {
       ) : (
         <div className="flex flex-col md:flex-row w-full p-4">
           <div className="w-full md:w-2/3">
-            {generalAlbum && (
+            {generalAlbum ? (
               <>
                 <div className="mt-custom"></div>
                 <div className="text-4xl font-bold text-white mb-4 mt-4">Name: {generalAlbum.name}</div>
@@ -124,12 +129,14 @@ export default function ProductPage() {
                     {errorMessage && (
                       <>
                         <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                        <p className="text-sm text-red-500">{errorMessage + ". Por favor ingrese el album en forma manual"}</p>
+                        <p className="text-sm text-red-500">{errorMessage}</p>
                       </>
                     )}
                   </div>
                 </form>
               </>
+            ) : (
+              <p className="text-lg text-white mt-custom">No se encontró información del album</p>
             )}
           </div>
           

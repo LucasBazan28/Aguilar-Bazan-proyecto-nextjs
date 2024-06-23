@@ -1,6 +1,7 @@
 import "server-only"
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchTopListened } from "@/app/lib/data";
+export const revalidate = 0  
 
 // Manejar la solicitud GET para obtener los 5 álbumes más escuchados
 export async function GET() {

@@ -1,6 +1,7 @@
 import "server-only"
 import { type NextRequest, NextResponse } from 'next/server';
 import { fetchAlbumByName } from '../../lib/data';
+export const revalidate = 0       //cada vez que la ruta es llamada es relavidada, por lo que la información de la api se mantiene actualizada
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

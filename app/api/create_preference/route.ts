@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
                 ${item.price * item.quantity},  
                 CURRENT_DATE
                 )
+                
 
     `;}
     return NextResponse.json({ preferenceId: response.id });
