@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         })),
         back_urls: {
           success: "https://aguilar-bazan-proyecto-nextjs.vercel.app",
-          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app/api/failure-payment", //PONER ENDPOINT DE FALLO PARA BORRAR DE BD
+          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app/api/failure-payment", 
           pending: "https://aguilar-bazan-proyecto-nextjs.vercel.app"
         },
         auto_return: "approved",
@@ -33,16 +33,19 @@ export async function POST(request: NextRequest) {
     console.log(items);
     console.log(response.id)
     for (const item of items) {
-    await sql`
-        INSERT INTO sales (preference_id, price, quantity, subtotal, transaction_date)
-        VALUES (${response.id}, ${item.price},
+      await sql`
+        INSERT INTO sales (preference_id, name, price, quantity, subtotal, transaction_date)
+        VALUES (${response.id}, ${item.name}, ${item.price},
                 ${item.quantity},
                 ${item.price * item.quantity},  
                 CURRENT_DATE
-                )
-                
-
-    `;}
+                )`;
+      await sql`
+          UPDATE albums
+                SET cantidadcomprada = cantidadcomprada + ${item.quantity}
+                WHERE name = ${item.name}
+            `;          
+    }
     return NextResponse.json({ preferenceId: response.id });
   } catch (error) {
     console.error(error);
