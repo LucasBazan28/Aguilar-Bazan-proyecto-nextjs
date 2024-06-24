@@ -1,3 +1,17 @@
+Nota: la forma de pagar en mercado pago con checkout pro cambio, por lo que ya no se puede pagar sin estar logueado como antes (simplemente se pagaba con una tarjeta de prueba)
+
+Te dejo la cuenta de prueba para que puedas probar el pago junto con una tarjeta de prueba:
+user: TESTUSER1147915487
+pass: EdNZgN5l7s
+
+nro tarjeta 5031 7557 3453 0604
+nombre: APRO
+seguridad: 123
+caducidad 11/25
+
+Link de vercel en producción: https://aguilar-bazan-proyecto-nextjs-lucasbazan28s-projects.vercel.app/
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
