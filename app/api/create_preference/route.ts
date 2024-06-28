@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
           unit_price: Number(item.price) ,
         })),
         back_urls: {
-          success: "https://timeless-sounds.vercel.app/sucess_payment",
-          failure: "https://timeless-sounds.vercel.app/api/failure-payment", 
+          success: "https://timeless-sounds.vercel.app/sucess_payment", //link sucess
+          failure: "https://timeless-sounds.vercel.app/api/failure-payment", //link failure
           pending: "https://timeless-sounds.vercel.app"
         },
         auto_return: "approved",
