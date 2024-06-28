@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Header from "../ui/adminHeader";
+import { logOut } from "../lib/actions";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +17,14 @@ export default function Layout({
 
       <>
           <Header />
-            <div className="flex flex-col overflow-y-auto min-h-screen">
+            <div className="flex flex-col overflow-y-auto min-h-screen bg-gradient-to-r from-gray-200 to-gray-400">
                 {children}
+
+                <form action={logOut}>
+                    <button className="ml-8 mb-8 rounded-md bg-black p-4 text-lg font-medium text-white hover:bg-blue-600 hover:text-black">
+                        <div>Sign Out</div>
+                    </button>
+                </form>
 
             </div>
           

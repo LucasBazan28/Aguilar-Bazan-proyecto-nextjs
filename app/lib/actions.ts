@@ -49,7 +49,7 @@ export async function authenticate(
       const artist = formData.get('artist') as string ;
       const album = formData.get('albumName') as string;
 
-      const apiKey = '7bdea081f9cfb2778ce14d92ef7cc2ed';
+      const apiKey = process.env.LASTFM_APIKEY;
       const url = `https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=${artist}&album=${album}&format=json`;
       const response = await fetch(url);
       const data = await response.json();
@@ -113,7 +113,7 @@ export async function authenticate(
     const artist = formData.get('artist') as string;
 
   try {
-    const apiKey = '7bdea081f9cfb2778ce14d92ef7cc2ed';
+    const apiKey = process.env.LASTFM_APIKEY;
     const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
 
     const response = await fetch(url);

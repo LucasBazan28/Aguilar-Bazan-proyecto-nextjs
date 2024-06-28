@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { NextRequest, NextResponse } from 'next/server';
 
-const client = new MercadoPagoConfig({ accessToken: "APP_USR-852856296976518-062319-315cd846402e54a898845b3db3b80809-1869341617" });
+const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACESSTOKEN! });
 
 export async function POST(request: NextRequest) {
     console.log("ESTOY EN CREATE PREFERENCE")
