@@ -1,37 +1,15 @@
 .header {
-    position: fixed;
-    top: 0;
     width: 100%;
     background-color: #ddae78;
     color: white;
-    transition: height 0.3s ease; /* Transición solo en la altura */
-    z-index: 1000;
   }
   
-  .header.expanded {
-    height: 15%; /* Tamaño del header expandido */
-  }
-  
-  .header.collapsed {
-    height: 9%; /* Tamaño del header contraído */
-  }
-  .header.expanded .logo {
-    width: 10%;
-    height: 100%;
-  }
-  
-  /* Cuando el encabezado está colapsado, el logo tiene un tamaño menor */
-  .header.collapsed .logo {
-    width: 8%;
-    height: 100%;
-  }
   
   .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%; /* Asegura que el contenedor llene todo el header */
-    padding: 0 20px;
   }
 
   .logo {

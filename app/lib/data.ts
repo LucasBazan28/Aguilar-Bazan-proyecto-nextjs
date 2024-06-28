@@ -2,9 +2,24 @@ import "server-only"
 import { sql } from '@vercel/postgres';
 import {
   Album,
+  Genre,
   Sale
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
+
+export async function fetchAllGenres() {
+  noStore();
+  try {
+    const data = await sql<Genre>`
+      SELECT name
+      FROM generos`;
+
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the albums.');
+  }
+}
 
 export async function fetchAllAlbums() {
     noStore();
@@ -67,7 +82,7 @@ export async function fetchAlbumsWithGenre(genre: string) {  //el parametro del 
         throw new Error('Failed to fetch the albums.');
     }
 }
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 8;
 export async function fetchFilteredAlbums(
   query: string,
   currentPage: number,

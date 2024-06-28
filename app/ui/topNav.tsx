@@ -1,46 +1,23 @@
-"use client";
-import React, { useState, useEffect } from 'react';
 import './header.css';
 import Link from 'next/link';
 import Logo from './logo';
 import { CartIcon } from './cartIcons';
-import { SignInOutButton } from './SignInOutButton';
+import { isLoggedIn } from '../lib/actions';
 
-const Header = () => {
-  const [isScrollingUp, setIsScrollingUp] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY < lastScrollY) {
-          setIsScrollingUp(true);
-        } else {
-          setIsScrollingUp(false);
-        }
-        setLastScrollY(currentScrollY);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
+export default async function Header() {
+  const userLoggedIn = await isLoggedIn(); // Verificar si el usuario está logueado
 
   return (
-    <header className={`header ${isScrollingUp ? 'expanded' : 'collapsed'}`}>
-      <div className="container mx-auto">
+    <header className="header">
+      <div className="container mx-auto py-2">
         <Logo />
         <div className="flex space-x-4">
-          <Link href="/admin">
+          {userLoggedIn && (<Link href="/admin">
             <button>Admin</button>
-          </Link>
-          <Link href="/login">
+          </Link>)}
+          {!userLoggedIn && (<Link href="/login">
             <button>Login</button>
-          </Link>
+          </Link>)}
           <Link href="/cart">
             <button><CartIcon /></button>
           </Link>
@@ -49,5 +26,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

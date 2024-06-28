@@ -80,7 +80,6 @@ export default function ProductPage() {
     <div className="flex min-h-screen min-w-screen">
       {loading ? (
         <div>
-          <div className="mt-custom"></div>
           <p className="text-center text-xl ml-6 mt-6">Loading...</p>
         </div>
       ) : (
@@ -88,7 +87,6 @@ export default function ProductPage() {
           <div className="w-full md:w-2/3">
             {generalAlbum ? (
               <>
-                <div className="mt-custom"></div>
                 <div className="text-4xl font-bold text-white mb-4 mt-4">Name: {generalAlbum.name}</div>
                 <ul className={`${inter.className} text-white list-none space-y-2 mb-8`}>
                   <li>Artist: {generalAlbum.artist}</li>
@@ -140,7 +138,7 @@ export default function ProductPage() {
             )}
           </div>
           
-          <div className="w-full mt-4 md:w-1/3 md:pl-8 md:mt-custom">
+          <div className="w-full mt-4 md:w-1/3 md:pl-8">
             {generalAlbum && (
               <ManageProductInCart album={generalAlbum} />
             )}

@@ -58,3 +58,8 @@ export type Artist = {
   name: string, 
   summary: string
 }
+
+export type Genre = {
+  id: string,
+  name: string;
+}

@@ -40,7 +40,6 @@ export default function ArtistPage() {
 
   return (
     <div className="flex flex-col min-h-screen min-w-screen bg-gray-600 text-white p-8">
-      <div className="mt-custom"></div>
       {loading ? (
         <p className="text-center text-xl">Cargando...</p>
       ) : (

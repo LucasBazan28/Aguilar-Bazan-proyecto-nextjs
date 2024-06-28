@@ -21,6 +21,10 @@ export async function logOut(){
   }
 }
 
+export async function isLoggedIn(){
+  return await auth() != null;
+}
+
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData
@@ -82,6 +86,16 @@ export async function authenticate(
 
           data.album.price = price;
           data.album.cantidadComprada = 0;
+
+          const existingGenre = await sql`
+            SELECT id FROM generos WHERE LOWER(name) = LOWER(${data.album.genre})
+          `;
+          if (existingGenre.rows.length == 0){
+            await sql`
+            INSERT INTO generos (name) VALUES (LOWER(${data.album.genre}))
+            `;
+          }
+
           await sql`
             INSERT INTO albums (name, artist, smallImage, mediumImage, largeImage, extraLargeImage, megaImage, lastFmUrl, listeners, genre, summary, price, cantidadComprada)
             VALUES (${data.album.name}, ${data.album.artist}, NULLIF(${data.album.image[0]["#text"]}, ''), 
@@ -113,29 +127,32 @@ export async function authenticate(
     const artist = formData.get('artist') as string;
 
   try {
-    const apiKey = process.env.LASTFM_APIKEY;
-    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
+    const result = await sql`SELECT * FROM artists WHERE LOWER(name) = LOWER(${artist})`;
 
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.error) {
-      return data.message; // Si hay un error, devuelve el mensaje de error
-    }  else if (!data.artist.bio || !data.artist.bio.summary) {
-      return 'El artista no tiene un resumen disponible'; // Si no hay resumen disponible para el artista
-    } else {
-      const result = await sql`SELECT * FROM artists WHERE LOWER(name) = LOWER(${data.artist.name})`;
-
-      inserted = true;
-      if (result.rows.length == 0) {
-
+    if (result.rows.length == 0) {
+      const apiKey = process.env.LASTFM_APIKEY;
+      const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=${apiKey}&format=json`;
+  
+      const response = await fetch(url);
+      const data = await response.json();
+  
+      if (data.error) {
+        return data.message; // Si hay un error, devuelve el mensaje de error
+      }  else if (!data.artist.bio || !data.artist.bio.summary) {
+        return 'El artista no tiene un resumen disponible'; // Si no hay resumen disponible para el artista
+      } else{
         // Insertar en la tabla de artistas
         await sql`
-          INSERT INTO artists (name, summary)
-          VALUES (${data.artist.name}, ${data.artist.bio.summary})
+        INSERT INTO artists (name, summary)
+        VALUES (${data.artist.name}, ${data.artist.bio.summary})
         `;
+        inserted = true;
       }
     }
+    else{
+      inserted = true;
+    }
+
   } catch (error) {
     console.error('Error al crear artista:', error);
     return 'Ocurrió un error al crear el artista';
