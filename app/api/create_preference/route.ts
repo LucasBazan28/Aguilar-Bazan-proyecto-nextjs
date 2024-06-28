@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
           unit_price: Number(item.price) ,
         })),
         back_urls: {
-          success: "https://aguilar-bazan-proyecto-nextjs.vercel.app",
-          failure: "https://aguilar-bazan-proyecto-nextjs.vercel.app/api/failure-payment", 
-          pending: "https://aguilar-bazan-proyecto-nextjs.vercel.app"
+          success: "https://timeless-sounds.vercel.app/sucess_payment",
+          failure: "https://timeless-sounds.vercel.app/api/failure-payment", 
+          pending: "https://timeless-sounds.vercel.app"
         },
         auto_return: "approved",
       }
